@@ -304,7 +304,7 @@
     <div class="nav">
         <button class="nav-btn active" onclick="showTab('map')">Map</button>
         <button class="nav-btn" onclick="showTab('categories')">Categories</button>
-        <button class="nav-btn" onclick="showTab('info')">Info</button>
+        <button class="nav-btn" onclick="showTab('info')">Location & Prices</button>
         <button class="nav-btn" onclick="showTab('about')">About</button>
     </div>
 
@@ -515,11 +515,11 @@
                 </div>
                 <div class="price-item">
                     <div class="price-label">Vinyl (each)</div>
-                    <div class="price-value">$3</div>
+                    <div class="price-value">$4</div>
                 </div>
                 <div class="price-item">
                     <div class="price-label">Vinyl (per set)</div>
-                    <div class="price-value">$5</div>
+                    <div class="price-value">$7</div>
                 </div>
                 <div class="price-item">
                     <div class="price-label">Sheet Music (1 sheet)</div>
@@ -563,11 +563,11 @@
                 </div>
                 <div class="price-item">
                     <div class="price-label">Box Set - Paperback</div>
-                    <div class="price-value">$4/set</div>
+                    <div class="price-value">$6/set</div>
                 </div>
                 <div class="price-item">
                     <div class="price-label">Box Set - Hardback</div>
-                    <div class="price-value">$6/set</div>
+                    <div class="price-value">$8/set</div>
                 </div>
             </div>
             
@@ -714,7 +714,7 @@
             </div>
             <p style="background: #FFCC80; padding: 15px; border-radius: 8px; margin: 0; text-align: center; font-weight: 500; color: #BF360C;">
                 Interested? Contact the PTSA to get involved!<br>
-                <a href="mailto:bccusedbooksale@bccptsa.org" style="color: #BF360C; text-decoration: underline;">bccusedbooksale@bccptsa.org</a>
+                <a href="/cdn-cgi/l/email-protection#1270717167617776707d7d7961737e7752707171626661733c7d6075" style="color: #BF360C; text-decoration: underline;"><span class="__cf_email__" data-cfemail="ef8d8c8c9a9c8a8b8d8080849c8e838aaf8d8c8c9f9b9c8ec1809d88">[email&#160;protected]</span></a>
             </p>
         </div>
     </div>
@@ -729,7 +729,7 @@
         </div>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         const categories = {
             'art-atrium': {
                 name: 'Art Atrium',
@@ -845,7 +845,14 @@
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             
             document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+            
+            // Find and activate the button that was clicked
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(button => {
+                if (button.getAttribute('onclick').includes(tabName)) {
+                    button.classList.add('active');
+                }
+            });
 
             if (tabName === 'categories') {
                 renderCategories(allCategories);
@@ -867,34 +874,34 @@
                         <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                             <h4 style="color: #e91e63; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #e91e63; padding-bottom: 8px;">👶 Children's Books</h4>
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                                <span style="background: #ffcdd2; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Picture Books (HB)</span>
-                                <span style="background: #ffcdd2; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Picture Books (PB)</span>
-                                <span style="background: #f8bbd0; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Board Books</span>
-                                <span style="background: #f8bbd0; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Early Readers</span>
-                                <span style="background: #e1bee7; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Series Books</span>
-                                <span style="background: #d1c4e9; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Chapter Books</span>
-                                <span style="background: #b3e5fc; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Graphic Novels</span>
-                                <span style="background: #b2dfdb; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Kids History/Bio</span>
-                                <span style="background: #c8e6c9; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Kids Science/Nature</span>
-                                <span style="background: #dcedc8; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Kids Sports</span>
-                                <span style="background: #ffd54f; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: bold; grid-column: 1 / -1;">🔥 Hot Titles</span>
+                                <span style="background: #ffcdd2; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Picture Books (HB)</span>
+                                <span style="background: #ffcdd2; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Picture Books (PB)</span>
+                                <span style="background: #f8bbd0; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Board Books</span>
+                                <span style="background: #f8bbd0; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Early Readers</span>
+                                <span style="background: #e1bee7; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Series Books</span>
+                                <span style="background: #d1c4e9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Chapter Books</span>
+                                <span style="background: #b3e5fc; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Graphic Novels</span>
+                                <span style="background: #b2dfdb; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Kids History/Bio</span>
+                                <span style="background: #c8e6c9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Kids Science/Nature</span>
+                                <span style="background: #dcedc8; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Kids Sports</span>
+                                <span style="background: #ffd54f; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word; font-weight: bold; grid-column: 1 / -1;">🔥 Hot Titles</span>
                             </div>
                         </div>
                         
                         <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                             <h4 style="color: #1976d2; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #1976d2; padding-bottom: 8px;">👨‍👩‍👧 Adult & General</h4>
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                                <span style="background: #bbdefb; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Foreign Language</span>
-                                <span style="background: #c5cae9; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Education/Teaching</span>
-                                <span style="background: #fff9c4; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Music/Vinyl</span>
-                                <span style="background: #ffecb3; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Parenting/Family</span>
-                                <span style="background: #ffe0b2; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Health/Medicine</span>
-                                <span style="background: #ffccbc; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Self-Help/Psychology</span>
-                                <span style="background: #d7ccc8; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Sports/Adventure</span>
-                                <span style="background: #f0f4c3; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Exercise/Fitness</span>
-                                <span style="background: #c8e6c9; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Gender Studies/LGBTQ+</span>
-                                <span style="background: #b2dfdb; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Social Sciences</span>
-                                <span style="background: #f48fb1; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center; grid-column: 1 / -1;">Non-Fiction Reference</span>
+                                <span style="background: #bbdefb; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Foreign Language</span>
+                                <span style="background: #c5cae9; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Education/Teaching</span>
+                                <span style="background: #fff9c4; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Music/Vinyl</span>
+                                <span style="background: #ffecb3; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Parenting/Family</span>
+                                <span style="background: #ffe0b2; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Health/Medicine</span>
+                                <span style="background: #ffccbc; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Self-Help/Psychology</span>
+                                <span style="background: #d7ccc8; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Sports/Adventure</span>
+                                <span style="background: #f0f4c3; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Exercise/Fitness</span>
+                                <span style="background: #c8e6c9; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Gender Studies/LGBTQ+</span>
+                                <span style="background: #b2dfdb; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Social Sciences</span>
+                                <span style="background: #f48fb1; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word; grid-column: 1 / -1;">Non-Fiction Reference</span>
                             </div>
                         </div>
                         
@@ -909,35 +916,35 @@
                         <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                             <h4 style="color: #1976d2; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #1976d2; padding-bottom: 8px;">📖 Fiction</h4>
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                                <span style="background: #e1f5fe; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Fiction (PB/HB)</span>
-                                <span style="background: #f3e5f5; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Mystery/Thriller</span>
-                                <span style="background: #fce4ec; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Romance</span>
-                                <span style="background: #e8f5e9; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Sci-Fi/Fantasy</span>
-                                <span style="background: #fff3e0; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Teen/Young Adult</span>
-                                <span style="background: #ffebee; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Graphic Novels (Adult)</span>
-                                <span style="background: #fce4ec; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Classics</span>
-                                <span style="background: #e1bee7; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Short Stories/Essays</span>
+                                <span style="background: #e1f5fe; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Fiction (PB/HB)</span>
+                                <span style="background: #f3e5f5; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Mystery/Thriller</span>
+                                <span style="background: #fce4ec; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Romance</span>
+                                <span style="background: #e8f5e9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Sci-Fi/Fantasy</span>
+                                <span style="background: #fff3e0; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Teen/Young Adult</span>
+                                <span style="background: #ffebee; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Graphic Novels (Adult)</span>
+                                <span style="background: #fce4ec; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Classics</span>
+                                <span style="background: #e1bee7; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Short Stories/Essays</span>
                             </div>
                         </div>
                         
                         <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                             <h4 style="color: #388e3c; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #388e3c; padding-bottom: 8px;">📚 Non-Fiction</h4>
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                                <span style="background: #e8eaf6; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">African American History</span>
-                                <span style="background: #e8eaf6; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">American History/Politics</span>
-                                <span style="background: #e0f2f1; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Biography/Memoir</span>
-                                <span style="background: #fff8e1; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Business/Econ/Finance</span>
-                                <span style="background: #fff9c4; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Large Print/Tiny Books</span>
-                                <span style="background: #b2dfdb; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Local Interest (MD-DC-VA)</span>
-                                <span style="background: #c8e6c9; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Nature & Environment</span>
-                                <span style="background: #f3e5f5; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Philosophy</span>
-                                <span style="background: #fce4ec; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Poetry/Plays</span>
-                                <span style="background: #efebe9; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Reference</span>
-                                <span style="background: #fff3e0; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Religion</span>
-                                <span style="background: #e0f7fa; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Science & Technology</span>
-                                <span style="background: #fff59d; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">Test Prep (2022+)</span>
-                                <span style="background: #f1f8e9; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center;">World History</span>
-                                <span style="background: #b2dfdb; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-align: center; grid-column: 1 / -1;">Theme Tables</span>
+                                <span style="background: #e8eaf6; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">African American History</span>
+                                <span style="background: #e8eaf6; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">American History/Politics</span>
+                                <span style="background: #e0f2f1; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Biography/Memoir</span>
+                                <span style="background: #fff8e1; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Business/Econ/Finance</span>
+                                <span style="background: #fff9c4; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Large Print/Tiny Books</span>
+                                <span style="background: #b2dfdb; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Local Interest (MD-DC-VA)</span>
+                                <span style="background: #c8e6c9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Nature & Environment</span>
+                                <span style="background: #f3e5f5; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Philosophy</span>
+                                <span style="background: #fce4ec; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Poetry/Plays</span>
+                                <span style="background: #efebe9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Reference</span>
+                                <span style="background: #fff3e0; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Religion</span>
+                                <span style="background: #e0f7fa; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Science & Technology</span>
+                                <span style="background: #fff59d; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Test Prep (2022+)</span>
+                                <span style="background: #f1f8e9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">World History</span>
+                                <span style="background: #b2dfdb; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word; grid-column: 1 / -1;">Theme Tables</span>
                             </div>
                         </div>
                         
@@ -952,13 +959,13 @@
                         
                         <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
-                                <span style="background: #ffccbc; padding: 12px 15px; border-radius: 6px; font-size: 15px; text-align: center; font-weight: 500;">🍷 Cooking/Food/Wine</span>
-                                <span style="background: #c8e6c9; padding: 12px 15px; border-radius: 6px; font-size: 15px; text-align: center; font-weight: 500;">🏡 Home & Garden</span>
-                                <span style="background: #f8bbd0; padding: 12px 15px; border-radius: 6px; font-size: 15px; text-align: center; font-weight: 500;">🎨 Hobbies/Crafts</span>
-                                <span style="background: #ffe082; padding: 12px 15px; border-radius: 6px; font-size: 15px; text-align: center; font-weight: 500;">🎄 Holidays</span>
-                                <span style="background: #81d4fa; padding: 12px 15px; border-radius: 6px; font-size: 15px; text-align: center; font-weight: 500;">✈️ Travel (2020+)</span>
-                                <span style="background: #fff59d; padding: 12px 15px; border-radius: 6px; font-size: 15px; text-align: center; font-weight: 500;">😂 Humor</span>
-                                <span style="background: #a5d6a7; padding: 12px 15px; border-radius: 6px; font-size: 15px; text-align: center; font-weight: 500; grid-column: 1 / -1;">🐾 Pets</span>
+                                <span style="background: #ffccbc; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">🍷 Cooking/Food/Wine</span>
+                                <span style="background: #c8e6c9; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">🏡 Home & Garden</span>
+                                <span style="background: #f8bbd0; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">🎨 Hobbies/Crafts</span>
+                                <span style="background: #ffe082; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">🎄 Holidays</span>
+                                <span style="background: #81d4fa; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">✈️ Travel (2020+)</span>
+                                <span style="background: #fff59d; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">😂 Humor</span>
+                                <span style="background: #a5d6a7; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word; grid-column: 1 / -1;">🐾 Pets</span>
                             </div>
                         </div>
                         
@@ -1101,15 +1108,19 @@
                 </div>
             `;
             
-            modal.classList.add('active');
+            modal.style.display = 'block';
         }
 
         function closeModal() {
-            document.getElementById('location-modal').classList.remove('active');
-        }
+            document.getElementById('location-modal').style.display = 'none';
+             }
 
-        // Initialize
-        renderCategories(allCategories);
+        window.onclick = function(event) {
+            const modal = document.getElementById('location-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
