@@ -735,21 +735,20 @@
                 name: 'Art Atrium',
                 tables: 80,
                 categories: [
-                    'Picture Books (Hardback & Paperback)',
-                    'Board Books',
-                    'Early Readers',
-                    'Chapter Books (Hardback & Paperback)',
-                    'Series Books (Hardback & Paperback)',
+                    'Children\'s Picture Books (Hardback & Paperback)',
+                    'Children\'s Board Books',
+                    'Children\'s Early Readers',
+                    'Children\'s Chapter Books (Hardback & Paperback)',
+                    'Children\'s Series Books (Hardback & Paperback)',
                     'Children\'s Reference',
                     'Children\'s History/Biography',
                     'Children\'s Science/Nature',
                     'Children\'s Sports',
                     'Children\'s Graphic Novels/Comics',
-                    'Games/Magic/Puzzles',
+                    'Children\'s Games/Magic/Puzzles',
                     'Foreign Language (Children & Adult)',
                     'Education/Teaching/College Search',
                     'Exercise/Fitness/Dance',
-                    'Fashion/Beauty',
                     'Gender Studies/LGBTQ+',
                     'Health/Medicine/Diet/Nutrition',
                     'Music/Sheet Music/Vinyl',
@@ -757,7 +756,7 @@
                     'Self-Help/Psychology',
                     'Social Sciences',
                     'Sports/Adventure',
-                    'Hot Titles (Popular Children\'s Series)'
+                    'Children\'s Hot Titles (Popular Series)'
                 ]
             },
             'cafeteria': {
@@ -808,6 +807,7 @@
                 tables: 11,
                 categories: [
                     'Art/Photography',
+                    'Fashion/Beauty',
                     'Film/TV/Media',
                     'Volunteer Tables'
                 ]
@@ -822,9 +822,7 @@
             'book-cellar': {
                 name: 'Book Cellar',
                 tables: 'Special',
-                categories: [
-                    '(All categories moved to Cafeteria for 2026)'
-                ]
+                categories: []
             }
         };
 
@@ -839,6 +837,9 @@
                 });
             });
         });
+
+        // Sort categories alphabetically by name
+        allCategories.sort((a, b) => a.name.localeCompare(b.name));
 
         function showTab(tabName) {
             document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
@@ -1079,6 +1080,8 @@
             const filtered = allCategories.filter(cat => 
                 cat.name.toLowerCase().includes(searchTerm.toLowerCase())
             );
+            // Keep alphabetical order in search results
+            filtered.sort((a, b) => a.name.localeCompare(b.name));
             renderCategories(filtered);
         }
 
