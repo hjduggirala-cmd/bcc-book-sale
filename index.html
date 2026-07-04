@@ -1,1137 +1,814 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B-CC Used Book Sale 2026</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B-CC Used Book Sale · March 7–8, 2027</title>
+<meta name="description" content="The B-CC PTSA Used Book Sale — 60,000+ books, March 7–8, 2027 at Bethesda-Chevy Chase High School. Map, categories, prices, and visitor information.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F5F2;
+  --surface:#FFFFFF;
+  --ink:#1C2733;
+  --muted:#66707C;
+  --line:#E5E2DC;
+  --accent:#8C2F39;
+  --accent-soft:#F6ECED;
+  --navy:#182433;
+  /* room colors */
+  --c-art:#B9822B;
+  --c-cafe:#9C4257;
+  --c-attend:#3F6B52;
+  --c-hall:#56789B;
+  --c-banned:#C25E31;
+  --c-cellar:#715C94;
+  --radius:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Libre Franklin',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.55;
+  font-size:15px;
+  padding-bottom:84px;
+}
+.wrap{max-width:560px;margin:0 auto;padding:0 18px}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f5f5;
-        }
+/* ---------- Header ---------- */
+header{background:var(--navy);color:#fff;padding:22px 0 20px}
+.header-accent{height:3px;background:var(--accent)}
+.eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:#8FA0B3;margin-bottom:5px;
+}
+h1{
+  font-family:'Source Serif 4',serif;font-weight:700;
+  font-size:clamp(26px,7vw,32px);line-height:1.12;letter-spacing:-.01em;
+}
+.dates{
+  margin-top:8px;font-size:13.5px;color:#B9C4D0;font-weight:500;
+  display:flex;flex-wrap:wrap;gap:4px 0;align-items:center;
+}
+.dates b{color:#fff;font-weight:600}
+.dates .sep{margin:0 9px;color:#4A5A6D}
 
-        .header {
-            background: #001f3f;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
+/* ---------- Sections ---------- */
+main{padding-top:20px}
+.tabpane{display:none}
+.tabpane.active{display:block;animation:fade .22s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.overline{
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin:26px 0 4px;
+}
+.overline:first-child{margin-top:0}
+h2{
+  font-family:'Source Serif 4',serif;font-weight:600;font-size:22px;
+  letter-spacing:-.01em;margin-bottom:12px;
+}
+h3{font-weight:700;font-size:14.5px;margin:14px 0 4px}
+p{margin-bottom:10px}
+.muted{color:var(--muted);font-size:14px}
 
-        .header-logo {
-            height: 60px;
-            width: auto;
-        }
+.card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;
+}
 
-        .header-content {
-            flex-grow: 1;
-        }
+/* ---------- Map ---------- */
+.mapbox{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:10px;margin-bottom:12px;
+}
+svg{display:block;width:100%;height:auto}
+.area{cursor:pointer}
+.area rect,.area ellipse{transition:filter .15s ease}
+.area:hover rect,.area:hover ellipse,.area:focus rect,.area:focus ellipse{filter:brightness(.965)}
+.area:focus{outline:none}
+.area:focus-visible rect,.area:focus-visible ellipse{stroke-width:4.5}
+.rm{
+  font-family:'Source Serif 4',serif;font-weight:700;
+}
+.lbl{
+  font-family:'Libre Franklin',sans-serif;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+}
+.li{font-family:'Libre Franklin',sans-serif;font-size:15px;fill:#3B4552}
+.cap{font-family:'Libre Franklin',sans-serif;fill:#66707C}
+.tag{font-family:'Libre Franklin',sans-serif;font-weight:700;letter-spacing:.1em;fill:#fff}
+.legend{
+  display:flex;flex-wrap:wrap;gap:7px 16px;justify-content:center;
+  font-size:12.5px;font-weight:500;color:var(--muted);margin-bottom:10px;
+}
+.legend span{display:flex;align-items:center;gap:6px}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.map-note{text-align:center;font-size:13px;color:var(--muted)}
+.map-hint{
+  text-align:center;font-size:13px;color:var(--muted);
+  margin:2px 0 12px;font-weight:500;
+}
 
-        .header h1 {
-            font-size: 24px;
-            margin-bottom: 5px;
-            color: #FFD700;
-        }
+/* ---------- Bottom sheet ---------- */
+.backdrop{
+  position:fixed;inset:0;background:rgba(24,36,51,.4);
+  opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:40;
+}
+.backdrop.show{opacity:1;pointer-events:auto}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:var(--surface);border-radius:16px 16px 0 0;
+  box-shadow:0 -6px 28px rgba(24,36,51,.22);
+  transform:translateY(105%);transition:transform .25s ease;
+  max-height:75vh;overflow-y:auto;
+  padding:16px 22px calc(24px + env(safe-area-inset-bottom));
+  max-width:560px;margin:0 auto;
+}
+.sheet.show{transform:translateY(0)}
+.sheet-handle{width:40px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 14px}
+.sheet-bar{height:4px;border-radius:2px;margin-bottom:12px}
+.sheet h3{font-family:'Source Serif 4',serif;font-weight:600;font-size:21px;margin:0}
+.sheet .note{
+  font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:3px 0 14px;
+}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  background:var(--bg);border:1px solid var(--line);border-radius:6px;
+  padding:6px 11px;font-size:13.5px;font-weight:500;color:var(--ink);
+}
+.sheet-close{
+  margin-top:18px;width:100%;padding:12px;
+  background:var(--navy);color:#fff;border:none;border-radius:8px;
+  font-family:'Libre Franklin',sans-serif;font-size:14.5px;font-weight:600;cursor:pointer;
+}
 
-        .header .date {
-            font-size: 16px;
-            opacity: 0.9;
-            color: #FFD700;
-        }
+/* ---------- Category search ---------- */
+.search{
+  display:flex;align-items:center;gap:9px;
+  background:var(--surface);border:1px solid var(--line);border-radius:9px;
+  padding:11px 14px;margin-bottom:12px;
+}
+.search:focus-within{border-color:var(--navy)}
+.search svg{width:17px;height:17px;flex:none;stroke:var(--muted)}
+.search input{
+  border:none;outline:none;flex:1;font-size:16px;
+  font-family:'Libre Franklin',sans-serif;background:transparent;color:var(--ink);
+}
+.cat-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:var(--surface);border:1px solid var(--line);border-radius:8px;
+  padding:11px 14px;margin-bottom:6px;cursor:pointer;
+}
+.cat-row:hover{border-color:#C9CFD6}
+.cat-row .name{font-weight:500;font-size:14.5px}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;flex:none;
+  font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);white-space:nowrap;
+}
+.no-results{
+  text-align:center;color:var(--muted);padding:26px 10px;font-size:14px;
+}
 
-        .nav {
-            display: flex;
-            background: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+/* ---------- Prices (contents-page style) ---------- */
+.pricecard{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:18px 20px 12px;margin-bottom:12px;
+}
+.pc-title{
+  font-family:'Source Serif 4',serif;font-weight:600;font-size:17px;
+  padding-bottom:10px;border-bottom:1px solid var(--ink);margin-bottom:6px;
+}
+.price-row{
+  display:flex;align-items:baseline;gap:8px;
+  padding:8px 0;font-size:14.5px;
+}
+.price-row .leader{
+  flex:1;border-bottom:1px dotted #C9CFD6;transform:translateY(-4px);
+  min-width:20px;
+}
+.price-row .amt{
+  font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.banner{
+  background:var(--accent);color:#fff;border-radius:var(--radius);
+  padding:16px 18px;margin-bottom:12px;
+}
+.banner b{font-size:15.5px;display:block;margin-bottom:2px}
+.banner span{font-size:13.5px;color:#F0D9DB}
+.payrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.payrow .chip{background:var(--bg)}
 
-        .nav-btn {
-            flex: 1;
-            padding: 15px;
-            background: white;
-            border: none;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
 
-        .nav-btn.active {
-            border-bottom-color: #3498db;
-            color: #3498db;
-        }
+/* ---------- Volunteer schedule ---------- */
+.tentative-note{
+  display:flex;align-items:flex-start;gap:10px;
+  background:#FBF6EC;border:1px solid #E3D5B8;border-radius:var(--radius);
+  padding:12px 14px;margin-bottom:14px;font-size:13px;color:#6E5A2E;
+}
+.tentative-note b{color:#5A4A22}
+.pill-tent{
+  display:inline-block;vertical-align:2px;margin-left:8px;
+  font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:#8A6E2F;border:1px dashed #C9A85A;border-radius:4px;padding:1px 6px;
+}
+.dropoff-card{
+  background:var(--navy);color:#fff;border-radius:var(--radius);
+  padding:18px 20px;margin-bottom:14px;
+}
+.dropoff-card h3{margin:0 0 2px;font-family:'Source Serif 4',serif;font-weight:600;font-size:18px}
+.dropoff-card .sub{font-size:13px;color:#B9C4D0;margin-bottom:12px}
+.do-dates{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.do-date{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);
+  border-radius:8px;padding:10px 6px;text-align:center;
+}
+.do-date .d{font-weight:700;font-size:12.5px;margin:2px 0}
+.do-date .w{font-size:11px;color:#8FA0B3;text-transform:uppercase;letter-spacing:.08em}
+.do-time{font-size:13px;color:#D7DEE6;text-align:center}
+.sched{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:6px 18px;margin-bottom:12px;
+}
+.sched-row{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;
+}
+.sched-row:last-child{border-bottom:none}
+.sched-row .date{flex:none;width:112px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.25}
+.sched-row .date small{display:block;font-size:10px;font-weight:500;color:var(--muted)}
+.sched-row .what{flex:1;color:#3B4552}
+.stag{
+  flex:none;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  border-radius:4px;padding:3px 8px;white-space:nowrap;
+}
+.stag.drop{background:var(--accent-soft);color:var(--accent)}
+.stag.sort{background:#EFEDE8;color:#66707C}
+.stag.setup{background:#E8EDF3;color:#33506B}
+.stag.sale{background:#E9F1EC;color:#3F6B52}
 
-        .content {
-            display: none;
-            padding: 20px;
-        }
+/* ---------- Info ---------- */
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.hourbox{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 12px;text-align:center;
+}
+.hourbox .day{font-weight:700;font-size:14px}
+.hourbox .time{font-size:13.5px;color:var(--muted);margin-top:2px}
+.hourbox .bag{
+  display:inline-block;margin-top:7px;font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--accent);
+  border:1px solid var(--accent);border-radius:4px;padding:2px 8px;
+}
+ul.clean{list-style:none;margin-bottom:4px}
+ul.clean li{padding:5px 0 5px 20px;position:relative;font-size:14.5px}
+ul.clean li::before{
+  content:"";position:absolute;left:2px;top:13px;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 14px}
+.stat{
+  background:var(--bg);border-radius:8px;padding:13px 4px;text-align:center;
+}
+.stat .n{font-family:'Source Serif 4',serif;font-weight:700;font-size:21px}
+.stat .l{font-size:10.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:1px}
+.warn{border-left:3px solid var(--accent)}
+.email{font-weight:700;word-break:break-all}
+a{color:var(--accent);font-weight:600}
 
-        .content.active {
-            display: block;
-        }
+/* ---------- Bottom nav ---------- */
+nav{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  background:var(--surface);border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.nav-inner{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.navbtn{
+  appearance:none;background:none;border:none;cursor:pointer;
+  padding:10px 4px 9px;display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-family:'Libre Franklin',sans-serif;font-size:10.5px;font-weight:600;
+  color:var(--muted);letter-spacing:.02em;position:relative;
+}
+.navbtn svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.navbtn.active{color:var(--accent)}
+.navbtn.active::before{
+  content:"";position:absolute;top:0;left:25%;right:25%;height:2px;background:var(--accent);
+}
+.navbtn:focus-visible{outline:2px solid var(--navy);outline-offset:-2px;border-radius:6px}
 
-        .search-box {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        .category-list {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .category-item {
-            padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s;
-        }
-
-        .category-item:hover {
-            background: #f8f9fa;
-        }
-
-        .category-item:last-child {
-            border-bottom: none;
-        }
-
-        .category-name {
-            font-weight: 500;
-            color: #2c3e50;
-        }
-
-        .category-location {
-            font-size: 13px;
-            color: #7f8c8d;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .location-badge {
-            background: #3498db;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .map-container {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .map-image {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .location-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .location-btn {
-            padding: 12px;
-            background: #ecf0f1;
-            border: 2px solid #bdc3c7;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .location-btn.selected {
-            background: #3498db;
-            color: white;
-            border-color: #3498db;
-        }
-
-        .info-section {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .info-section h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
-
-        .info-section p {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .price-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .price-item {
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 6px;
-            text-align: center;
-        }
-
-        .price-label {
-            font-size: 13px;
-            color: #7f8c8d;
-            margin-bottom: 5px;
-        }
-
-        .price-value {
-            font-size: 20px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .highlight-box {
-            background: #e8f5e9;
-            border-left: 4px solid #4caf50;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            max-width: 500px;
-            width: 100%;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: #7f8c8d;
-            padding: 0;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .area-highlight {
-            background: #fff3cd;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid #ffc107;
-        }
-    </style>
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important}
+}
+</style>
 </head>
 <body>
-    <div class="header">
-        <h1>📚 B-CC Used Book Sale</h1>
-        <div class="date">March 7-8, 2026 | 10am-5pm (Sat) | 10am-3pm (Sun)</div>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">B-CC PTSA</div>
+    <h1>Used Book Sale</h1>
+    <div class="dates">
+      <span><b>March 7–8, 2027 (tentative)</b></span><span class="sep">|</span>
+      <span>Sat 10–5 · Sun 10–3</span><span class="sep">|</span>
+      <span>Bethesda, MD</span>
+    </div>
+  </div>
+</header>
+<div class="header-accent"></div>
+
+<main class="wrap">
+
+  <!-- ============ MAP ============ -->
+  <section id="pane-map" class="tabpane active">
+    <div class="overline">First Floor</div>
+    <h2>Sale Map</h2>
+    <p class="map-hint">Select any room to see its full category list</p>
+    <div class="mapbox">
+      <svg viewBox="0 0 1100 820" role="img" aria-label="Floor plan of the book sale. Select a room for its categories.">
+
+        <!-- Stroller parking (top) -->
+        <rect x="170" y="20" width="690" height="50" rx="8" fill="#EFEDE8" stroke="#C9C4BA" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <text x="515" y="42" text-anchor="middle" class="lbl" font-size="13" fill="#66707C">Stroller &amp; Large Container Parking</text>
+        <text x="515" y="60" text-anchor="middle" class="cap" font-size="11.5">Please keep aisles clear</text>
+
+        <!-- Art Atrium -->
+        <g class="area" data-area="art" tabindex="0" role="button" aria-label="Art Atrium — children's and adult books, 80 tables">
+          <rect x="170" y="90" width="550" height="250" rx="10" fill="#FBF6EC" stroke="#B9822B" stroke-width="3"/>
+          <text x="445" y="130" text-anchor="middle" class="rm" font-size="27" fill="#8A5F1B">Art Atrium</text>
+          <text x="445" y="153" text-anchor="middle" class="cap" font-size="13.5">Children's &amp; Adult Books</text>
+          <text x="255" y="186" class="li">Children's</text>
+          <text x="255" y="209" class="li">Education</text>
+          <text x="255" y="232" class="li">Exercise &amp; Fitness</text>
+          <text x="255" y="255" class="li">Foreign Language</text>
+          <text x="255" y="278" class="li">Gender Studies</text>
+          <text x="505" y="186" class="li">Health &amp; Medicine</text>
+          <text x="505" y="209" class="li">Parenting</text>
+          <text x="505" y="232" class="li">Self-Help</text>
+          <text x="505" y="255" class="li">Sports</text>
+          <text x="505" y="278" class="li">Vinyl &amp; Sheet Music</text>
+          <rect x="352" y="296" width="186" height="27" rx="13.5" fill="#B9822B"/>
+          <text x="445" y="314" text-anchor="middle" class="tag" font-size="11">80 TABLES · SEE ALL</text>
+        </g>
+
+        <!-- Banned Book Nook -->
+        <g class="area" data-area="banned" tabindex="0" role="button" aria-label="Banned Book Nook">
+          <rect x="860" y="90" width="200" height="130" rx="10" fill="#FBF1EB" stroke="#C25E31" stroke-width="3"/>
+          <text x="960" y="138" text-anchor="middle" class="rm" font-size="19" fill="#9A4A25">Banned</text>
+          <text x="960" y="163" text-anchor="middle" class="rm" font-size="19" fill="#9A4A25">Book Nook</text>
+          <text x="960" y="192" text-anchor="middle" class="cap" font-size="12.5">Freedom to Read</text>
+        </g>
+
+        <!-- General Checkout (left, vertical) -->
+        <g class="area" data-area="checkout" tabindex="0" role="button" aria-label="General checkout">
+          <rect x="30" y="360" width="130" height="220" rx="10" fill="#182433"/>
+          <text x="95" y="398" text-anchor="middle" class="lbl" font-size="13" fill="#fff">General</text>
+          <text x="95" y="418" text-anchor="middle" class="lbl" font-size="13" fill="#fff">Checkout</text>
+          <line x1="55" y1="434" x2="135" y2="434" stroke="#3A4A5D" stroke-width="1.5"/>
+          <text x="95" y="460" text-anchor="middle" class="cap" font-size="13" fill="#B9C4D0">Cash</text>
+          <text x="95" y="484" text-anchor="middle" class="cap" font-size="13" fill="#B9C4D0">Credit Card</text>
+          <text x="95" y="508" text-anchor="middle" class="cap" font-size="13" fill="#B9C4D0">Apple Pay</text>
+          <text x="95" y="532" text-anchor="middle" class="cap" font-size="13" fill="#B9C4D0">Google Pay</text>
+        </g>
+
+        <!-- Attendance Atrium (center oval) -->
+        <g class="area" data-area="attendance" tabindex="0" role="button" aria-label="Attendance Atrium — new for 2026, 18 tables">
+          <ellipse cx="445" cy="470" rx="285" ry="130" fill="#EFF4F0" stroke="#3F6B52" stroke-width="3"/>
+          <text x="445" y="418" text-anchor="middle" class="rm" font-size="24" fill="#2E5340">Attendance Atrium</text>
+          <text x="298" y="458" class="li">Art &amp; Photography</text>
+          <text x="298" y="483" class="li">Cooking, Food &amp; Wine</text>
+          <text x="298" y="508" class="li">Hobbies &amp; Crafts</text>
+          <text x="298" y="533" class="li">Home &amp; Garden</text>
+          <text x="520" y="458" class="li">Humor</text>
+          <text x="520" y="483" class="li">Pets</text>
+          <text x="520" y="508" class="li">Travel</text>
+        </g>
+
+        <!-- Cafeteria Hallway (vertical strip) -->
+        <g class="area" data-area="hallway" tabindex="0" role="button" aria-label="Cafeteria Hallway — fashion, film and TV">
+          <rect x="750" y="240" width="90" height="360" rx="8" fill="#F0F4F8" stroke="#56789B" stroke-width="2.5"/>
+          <text x="795" y="278" text-anchor="middle" class="lbl" font-size="11.5" fill="#41607F">Hallway</text>
+          <line x1="768" y1="292" x2="822" y2="292" stroke="#56789B" stroke-width="1.5"/>
+          <text x="795" y="382" text-anchor="middle" class="cap" font-size="12.5">Fashion &amp;</text>
+          <text x="795" y="399" text-anchor="middle" class="cap" font-size="12.5">Beauty</text>
+          <text x="795" y="428" text-anchor="middle" class="cap" font-size="12.5">Film, TV &amp;</text>
+          <text x="795" y="445" text-anchor="middle" class="cap" font-size="12.5">Media</text>
+        </g>
+
+        <!-- Cafeteria (right side) -->
+        <g class="area" data-area="cafeteria" tabindex="0" role="button" aria-label="Cafeteria — fiction and non-fiction, 123 tables">
+          <rect x="860" y="240" width="200" height="360" rx="10" fill="#FAF1F3" stroke="#9C4257" stroke-width="3"/>
+          <text x="960" y="282" text-anchor="middle" class="rm" font-size="24" fill="#7C3345">Cafeteria</text>
+          <text x="960" y="305" text-anchor="middle" class="cap" font-size="12.5">Fiction &amp; Non-Fiction</text>
+          <text x="875" y="338" class="li" font-size="13.5">Business</text>
+          <text x="875" y="363" class="li" font-size="13.5">Classics</text>
+          <text x="875" y="388" class="li" font-size="13.5">Fiction</text>
+          <text x="875" y="413" class="li" font-size="13.5">History</text>
+          <text x="875" y="438" class="li" font-size="13.5">Memoir</text>
+          <text x="875" y="463" class="li" font-size="13.5">Mystery</text>
+          <text x="968" y="338" class="li" font-size="13.5">Philosophy</text>
+          <text x="968" y="363" class="li" font-size="13.5">Reference</text>
+          <text x="968" y="388" class="li" font-size="13.5">Romance</text>
+          <text x="968" y="413" class="li" font-size="13.5">Sci-Fi</text>
+          <text x="968" y="438" class="li" font-size="13.5">Science</text>
+          <text x="968" y="463" class="li" font-size="13.5">Young Adult</text>
+          <rect x="867" y="486" width="186" height="26" rx="13" fill="#9C4257"/>
+          <text x="960" y="503.5" text-anchor="middle" class="tag" font-size="10.5">123 TABLES · SEE ALL</text>
+          <text x="960" y="536" text-anchor="middle" class="cap" font-size="11.5">+ many more</text>
+        </g>
+
+        <!-- Book Cellar -->
+        <g class="area" data-area="cellar" tabindex="0" role="button" aria-label="Book Cellar — hidden treasures">
+          <rect x="860" y="620" width="200" height="110" rx="10" fill="#F4F1F8" stroke="#715C94" stroke-width="3"/>
+          <text x="960" y="668" text-anchor="middle" class="rm" font-size="20" fill="#584876">Book Cellar</text>
+          <text x="960" y="694" text-anchor="middle" class="cap" font-size="12.5">Hidden Treasures</text>
+        </g>
+
+        <!-- Book Dealer Checkout -->
+        <rect x="860" y="740" width="200" height="50" rx="8" fill="#fff" stroke="#182433" stroke-width="2"/>
+        <text x="960" y="770" text-anchor="middle" class="lbl" font-size="11.5" fill="#182433">Book Dealer Checkout</text>
+
+        <!-- Music Cafe -->
+        <ellipse cx="110" cy="690" rx="72" ry="32" fill="#F0F4F8" stroke="#56789B" stroke-width="2"/>
+        <text x="110" y="695" text-anchor="middle" class="lbl" font-size="11" fill="#41607F">Music Cafe</text>
+
+        <!-- Entrance -->
+        <rect x="120" y="745" width="200" height="50" rx="8" fill="#3F6B52"/>
+        <path d="M 220 752 L 213 762 L 227 762 Z" fill="#fff"/>
+        <text x="220" y="778" text-anchor="middle" class="lbl" font-size="13" fill="#fff">Entrance</text>
+      </svg>
     </div>
 
-    <div class="nav">
-        <button class="nav-btn active" onclick="showTab('map')">Map</button>
-        <button class="nav-btn" onclick="showTab('categories')">Categories</button>
-        <button class="nav-btn" onclick="showTab('info')">Location & Prices</button>
-        <button class="nav-btn" onclick="showTab('about')">About</button>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--c-art)"></i>Art Atrium</span>
+      <span><i class="dot" style="background:var(--c-attend)"></i>Attendance Atrium</span>
+      <span><i class="dot" style="background:var(--c-cafe)"></i>Cafeteria</span>
+      <span><i class="dot" style="background:var(--c-hall)"></i>Hallway</span>
+      <span><i class="dot" style="background:var(--c-banned)"></i>Banned Book Nook</span>
+      <span><i class="dot" style="background:var(--c-cellar)"></i>Book Cellar</span>
+    </div>
+    <p class="map-note">Looking for something specific? Use the <b>Categories</b> tab below.</p>
+  </section>
+
+  <!-- ============ CATEGORIES ============ -->
+  <section id="pane-find" class="tabpane">
+    <div class="overline">59 Sections</div>
+    <h2>Find a Book Category</h2>
+    <p class="muted" style="margin-bottom:12px">Search our book categories — we'll tell you which room each one is in.</p>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="catSearch" type="search" placeholder="Try &quot;mystery&quot; or &quot;cooking&quot;" aria-label="Search categories">
+    </div>
+    <div id="catList"></div>
+    <p class="muted" style="margin-top:14px">Don't see what you're looking for? Ask any volunteer in a UBS t-shirt — they know every table.</p>
+  </section>
+
+  <!-- ============ PRICES ============ -->
+  <section id="pane-prices" class="tabpane">
+    <div class="overline">Saturday Pricing</div>
+    <h2>Prices</h2>
+
+    <div class="pricecard">
+      <div class="pc-title">Adult Books</div>
+      <div class="price-row"><span>Paperback</span><span class="leader"></span><span class="amt">$3</span></div>
+      <div class="price-row"><span>Hardback</span><span class="leader"></span><span class="amt">$4</span></div>
+      <div class="price-row"><span>Test prep / college search</span><span class="leader"></span><span class="amt">$4</span></div>
+      <div class="price-row"><span>Vinyl record</span><span class="leader"></span><span class="amt">$4</span></div>
+      <div class="price-row"><span>Vinyl set</span><span class="leader"></span><span class="amt">$7</span></div>
+      <div class="price-row"><span>Sheet music, single sheet</span><span class="leader"></span><span class="amt">$1</span></div>
+      <div class="price-row"><span>Sheet music books</span><span class="leader"></span><span class="amt">$2</span></div>
+      <div class="price-row"><span>Tiny books</span><span class="leader"></span><span class="amt">$2</span></div>
     </div>
 
-    <div id="map" class="content active">
-        <div class="map-container">
-            <h2 style="margin-bottom: 15px; color: #2c3e50;">🗺️ Sale Map</h2>
-            <svg viewBox="0 0 1100 820" style="width: 100%; border: 2px solid #333; border-radius: 8px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
-                <!-- Define gradients and filters -->
-                <defs>
-                    <linearGradient id="artGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#FFE5B4;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#FFD699;stop-opacity:1" />
-                    </linearGradient>
-                    <linearGradient id="attendanceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#C8E6C9;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#A5D6A7;stop-opacity:1" />
-                    </linearGradient>
-                    <linearGradient id="cafeteriaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#FFEBEE;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#FFCDD2;stop-opacity:1" />
-                    </linearGradient>
-                    <linearGradient id="bannedGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#FFE0B2;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#FFCC80;stop-opacity:1" />
-                    </linearGradient>
-                    <linearGradient id="cellarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#E1BEE7;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#CE93D8;stop-opacity:1" />
-                    </linearGradient>
-                    <linearGradient id="hallwayGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#FFF9C4;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#FFF59D;stop-opacity:1" />
-                    </linearGradient>
-                    <filter id="shadow">
-                        <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
-                    </filter>
-                </defs>
-                
-                <!-- Stroller Parking at top -->
-                <rect x="170" y="20" width="690" height="50" fill="url(#hallwayGrad)" stroke="#F57C00" stroke-width="2" rx="8" filter="url(#shadow)"/>
-                <text x="515" y="42" text-anchor="middle" font-size="14" font-weight="bold" fill="#E65100">🚼 STROLLER & LARGE CONTAINER PARKING 🧳</text>
-                <text x="515" y="58" text-anchor="middle" font-size="11" fill="#666">Keep aisles clear!</text>
-                
-                <!-- Art Atrium - large beige area with category lists -->
-                <rect x="170" y="90" width="550" height="250" fill="url(#artGrad)" stroke="#FF8C00" stroke-width="3" rx="12" filter="url(#shadow)"/>
-                <circle cx="195" cy="115" r="8" fill="#FF6600"/>
-                <circle cx="695" cy="115" r="8" fill="#FF6600"/>
-                
-                <!-- Art Atrium title -->
-                <text x="445" y="125" text-anchor="middle" font-size="30" font-weight="bold" fill="#D35400">🎨 ART ATRIUM</text>
-                
-                <!-- Includes header -->
-                <text x="445" y="150" text-anchor="middle" font-size="15" fill="#666" font-style="italic">Children's & Adult Books</text>
-                
-                <!-- Art Atrium categories in two columns with bullets -->
-                <text x="260" y="180" font-size="16" fill="#333">• Children's</text>
-                <text x="260" y="202" font-size="16" fill="#333">• Education</text>
-                <text x="260" y="224" font-size="16" fill="#333">• Exercise/Fitness</text>
-                <text x="260" y="246" font-size="16" fill="#333">• Foreign Language</text>
-                <text x="260" y="268" font-size="16" fill="#333">• Gender Studies</text>
-                
-                <text x="510" y="180" font-size="16" fill="#333">• Health/Medicine</text>
-                <text x="510" y="202" font-size="16" fill="#333">• Parenting</text>
-                <text x="510" y="224" font-size="16" fill="#333">• Self-Help</text>
-                <text x="510" y="246" font-size="16" fill="#333">• Sports</text>
-                <text x="510" y="268" font-size="16" fill="#333">• Vinyl 🎵</text>
-                
-                <!-- Decorative line -->
-                <line x1="200" y1="310" x2="690" y2="310" stroke="#FF8C00" stroke-width="2" stroke-dasharray="5,5"/>
-                
-                <!-- Banned Books (top right) -->
-                <rect x="860" y="90" width="200" height="130" fill="url(#bannedGrad)" stroke="#F4511E" stroke-width="3" rx="12" filter="url(#shadow)"/>
-                <text x="960" y="130" text-anchor="middle" font-size="20" font-weight="bold" fill="#BF360C">🚫 BANNED</text>
-                <text x="960" y="155" text-anchor="middle" font-size="20" font-weight="bold" fill="#BF360C">BOOKS 📖</text>
-                <text x="960" y="185" text-anchor="middle" font-size="12" fill="#666" font-style="italic">Freedom to Read</text>
-                
-                <!-- Cashiers & Tallying (left side) -->
-                <rect x="30" y="360" width="130" height="220" fill="white" stroke="#4CAF50" stroke-width="3" rx="8" filter="url(#shadow)"/>
-                <rect x="35" y="365" width="120" height="40" fill="#E8F5E9" rx="6"/>
-                <text x="95" y="380" text-anchor="middle" font-size="14" font-weight="bold" fill="#2E7D32">💳 GENERAL</text>
-                <text x="95" y="400" text-anchor="middle" font-size="14" font-weight="bold" fill="#2E7D32">CHECKOUT</text>
-                <text x="95" y="435" text-anchor="middle" font-size="13" fill="#333">Cash ✓</text>
-                <text x="95" y="458" text-anchor="middle" font-size="13" fill="#333">Credit Card ✓</text>
-                <text x="95" y="481" text-anchor="middle" font-size="13" fill="#333">Apple Pay ✓</text>
-                <text x="95" y="504" text-anchor="middle" font-size="13" fill="#333">Google Pay ✓</text>
-                
-                <!-- Attendance Atrium (center - oval shape) -->
-                <ellipse cx="445" cy="470" rx="285" ry="130" fill="url(#attendanceGrad)" stroke="#43A047" stroke-width="3" filter="url(#shadow)"/>
-                <ellipse cx="445" cy="470" rx="275" ry="120" fill="none" stroke="#81C784" stroke-width="1" stroke-dasharray="8,4"/>
-                
-                <text x="445" y="400" text-anchor="middle" font-size="26" font-weight="bold" fill="#1B5E20">🏛️ ATTENDANCE ATRIUM</text>
-                <text x="445" y="425" text-anchor="middle" font-size="13" fill="#666" font-style="italic">NEW for 2026!</text>
-                
-                <!-- Attendance categories in two columns with decorative bullets -->
-                <text x="300" y="465" font-size="16" fill="#333">📸 Art/Photography</text>
-                <text x="300" y="490" font-size="16" fill="#333">🍷 Cooking/Food/Wine</text>
-                <text x="300" y="515" font-size="16" fill="#333">🎨 Hobbies/Crafts</text>
-                <text x="300" y="540" font-size="16" fill="#333">🌿 Home & Garden</text>
-                
-                <text x="500" y="465" font-size="16" fill="#333">😂 Humor</text>
-                <text x="500" y="490" font-size="16" fill="#333">🐾 Pets</text>
-                <text x="500" y="515" font-size="16" fill="#333">✈️ Travel</text>
-                
-                <!-- Hallway (vertical strip on right) -->
-                <rect x="750" y="240" width="90" height="360" fill="url(#hallwayGrad)" stroke="#F9A825" stroke-width="2" rx="8" filter="url(#shadow)"/>
-                <text x="795" y="275" text-anchor="middle" font-size="13" font-weight="bold" fill="#F57F17">📸 HALLWAY</text>
-                <line x1="765" y1="290" x2="825" y2="290" stroke="#F9A825" stroke-width="1"/>
-                <text x="795" y="380" text-anchor="middle" font-size="11" fill="#666" font-style="italic">Fashion/</text>
-                <text x="795" y="395" text-anchor="middle" font-size="11" fill="#666" font-style="italic">Film/TV</text>
-                
-                <!-- Cafeteria (right side) -->
-                <rect x="860" y="240" width="200" height="360" fill="url(#cafeteriaGrad)" stroke="#E91E63" stroke-width="3" rx="12" filter="url(#shadow)"/>
-                
-                <text x="960" y="275" text-anchor="middle" font-size="26" font-weight="bold" fill="#AD1457">☕ CAFETERIA</text>
-                
-                <!-- Includes header -->
-                <text x="960" y="305" text-anchor="middle" font-size="14" fill="#666" font-style="italic">Fiction & Non-Fiction</text>
-                
-                <!-- Cafeteria categories in two columns with bullets -->
-                <text x="875" y="335" font-size="15" fill="#333">• Business</text>
-                <text x="875" y="360" font-size="15" fill="#333">• Classics</text>
-                <text x="875" y="385" font-size="15" fill="#333">• Fiction</text>
-                <text x="875" y="410" font-size="15" fill="#333">• History</text>
-                <text x="875" y="435" font-size="15" fill="#333">• Memoir</text>
-                <text x="875" y="460" font-size="15" fill="#333">• Mystery</text>
-                
-                <text x="960" y="335" font-size="15" fill="#333">• Philosophy</text>
-                <text x="960" y="360" font-size="15" fill="#333">• Reference</text>
-                <text x="960" y="385" font-size="15" fill="#333">• Romance</text>
-                <text x="960" y="410" font-size="15" fill="#333">• Sci-Fi</text>
-                <text x="960" y="435" font-size="15" fill="#333">• Science</text>
-                <text x="960" y="460" font-size="15" fill="#333">• Young Adult</text>
-                
-                <text x="960" y="490" text-anchor="middle" font-size="11" fill="#666">+ many more!</text>
-                
-                <!-- Book Cellar (bottom right) -->
-                <rect x="860" y="620" width="200" height="110" fill="url(#cellarGrad)" stroke="#8E24AA" stroke-width="3" rx="12" filter="url(#shadow)"/>
-                <text x="960" y="665" text-anchor="middle" font-size="22" font-weight="bold" fill="#6A1B9A">📚 BOOK CELLAR</text>
-                <text x="960" y="690" text-anchor="middle" font-size="12" fill="#666" font-style="italic">Hidden Treasures</text>
-                
-                <!-- Book Dealer Checkout (beneath Book Cellar) -->
-                <rect x="860" y="740" width="200" height="50" fill="white" stroke="#FF9800" stroke-width="2" rx="8" filter="url(#shadow)"/>
-                <rect x="865" y="745" width="190" height="40" fill="#FFF3E0" rx="6"/>
-                <text x="960" y="770" text-anchor="middle" font-size="14" font-weight="bold" fill="#E65100">📋 Book Dealer Checkout</text>
-                
-                <!-- Music Cafe (bottom left) -->
-                <ellipse cx="110" cy="690" rx="70" ry="30" fill="#E3F2FD" stroke="#1976D2" stroke-width="2" rx="8"/>
-                <text x="110" y="698" text-anchor="middle" font-size="16" font-weight="bold" fill="#0D47A1">♫ MUSIC CAFE ♫</text>
-                
-                <!-- Main Entrance (bottom left, near Music Cafe) with more decoration -->
-                <rect x="120" y="745" width="200" height="50" fill="#C8E6C9" stroke="#43A047" stroke-width="3" rx="8" filter="url(#shadow)"/>
-                <path d="M 220 735 L 210 745 L 230 745 Z" fill="#2E7D32"/>
-                <text x="220" y="768" text-anchor="middle" font-size="20" font-weight="bold" fill="#1B5E20">⬆️ ENTRANCE ⬆️</text>
-                <text x="220" y="786" text-anchor="middle" font-size="11" fill="#388E3C">Welcome!</text>
-            </svg>
-        </div>
-
-        <div class="map-container">
-            <h2 style="margin-bottom: 10px; color: #2c3e50;">📍 Find Categories by Area</h2>
-            <p style="color: #7f8c8d; margin-bottom: 15px; font-size: 14px;">Tap any area to learn more</p>
-            
-            <div class="location-buttons">
-                <button class="location-btn" onclick="showLocation('art-atrium')">Art Atrium</button>
-                <button class="location-btn" onclick="showLocation('cafeteria')">Cafeteria</button>
-                <button class="location-btn" onclick="showLocation('attendance')">Attendance Atrium</button>
-                <button class="location-btn" onclick="showLocation('hallway')">Cafeteria Hallway</button>
-                <button class="location-btn" onclick="showLocation('banned')">Banned Books</button>
-                <button class="location-btn" onclick="showLocation('book-cellar')">Book Cellar</button>
-            </div>
-
-            <div id="location-details" style="margin-top: 20px;"></div>
-        </div>
+    <div class="pricecard">
+      <div class="pc-title">Children's Books</div>
+      <div class="price-row"><span>Picture books, paperback</span><span class="leader"></span><span class="amt">$2</span></div>
+      <div class="price-row"><span>Picture books, hardback</span><span class="leader"></span><span class="amt">$3</span></div>
+      <div class="price-row"><span>Board / Golden / Seuss</span><span class="leader"></span><span class="amt">$2</span></div>
+      <div class="price-row"><span>Coloring, puzzles &amp; games</span><span class="leader"></span><span class="amt">$2</span></div>
+      <div class="price-row"><span>Series &amp; chapter, paperback</span><span class="leader"></span><span class="amt">$3</span></div>
+      <div class="price-row"><span>Series &amp; chapter, hardback</span><span class="leader"></span><span class="amt">$4</span></div>
+      <div class="price-row"><span>Box set, paperback</span><span class="leader"></span><span class="amt">$6</span></div>
+      <div class="price-row"><span>Box set, hardback</span><span class="leader"></span><span class="amt">$8</span></div>
     </div>
 
-    <div id="categories" class="content">
-        <input type="text" class="search-box" placeholder="Search categories..." oninput="filterCategories(this.value)">
-        <div class="category-list" id="category-list"></div>
+    <div class="banner">
+      <b>Sunday is Bag Day</b>
+      <span>Fill a Trader Joe's bag with books — Sunday only.</span>
     </div>
 
-    <div id="info" class="content">
-        <div class="info-section">
-            <h2>📅 Sale Hours</h2>
-            <p><strong>Saturday, March 7:</strong> 10:00 AM - 5:00 PM</p>
-            <p><strong>Sunday, March 8:</strong> 10:00 AM - 3:00 PM</p>
-            <div class="highlight-box">
-                <strong>Sunday is BAG DAY!</strong><br>
-                Fill a Trader Joe's bag for just $15!
-            </div>
-        </div>
+    <div class="card">
+      <h3 style="margin-top:0">Good to know</h3>
+      <p class="muted" style="margin-bottom:2px">Prices above apply on Saturday. Book Cellar items are priced individually.</p>
+      <div class="payrow">
+        <span class="chip">Cash</span>
+        <span class="chip">Credit card</span>
+        <span class="chip">Apple Pay</span>
+        <span class="chip">Google Pay</span>
+      </div>
+    </div>
+  </section>
 
-        <div class="info-section">
-            <h2>📍 Location</h2>
-            <p><strong>Bethesda-Chevy Chase High School</strong><br>
-            First Floor - Multiple Areas<br>
-            4301 East-West Highway<br>
-            Bethesda, MD 20814</p>
-        </div>
+  <!-- ============ VOLUNTEER ============ -->
+  <section id="pane-volunteer" class="tabpane">
+    <div class="overline">2026–27 Season</div>
+    <h2>Volunteer &amp; Donate</h2>
 
-        <div class="info-section">
-            <h2>💰 Prices</h2>
-            
-            <h3 style="color: #2c3e50; margin-top: 20px; margin-bottom: 10px; font-size: 18px;">Adult Books</h3>
-            <div class="price-grid">
-                <div class="price-item">
-                    <div class="price-label">Paperback</div>
-                    <div class="price-value">$3</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Hardback</div>
-                    <div class="price-value">$4</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Test Prep / College Search</div>
-                    <div class="price-value">$4</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Vinyl (each)</div>
-                    <div class="price-value">$4</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Vinyl (per set)</div>
-                    <div class="price-value">$7</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Sheet Music (1 sheet)</div>
-                    <div class="price-value">$1</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Sheet Music Books</div>
-                    <div class="price-value">$2</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Tiny Books</div>
-                    <div class="price-value">$2</div>
-                </div>
-            </div>
-            
-            <h3 style="color: #2c3e50; margin-top: 25px; margin-bottom: 10px; font-size: 18px;">Children's Books</h3>
-            <div class="price-grid">
-                <div class="price-item">
-                    <div class="price-label">Picture Books - Paperback</div>
-                    <div class="price-value">$2</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Picture Books - Hardback</div>
-                    <div class="price-value">$3</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Board/Golden/Seuss</div>
-                    <div class="price-value">$2</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Coloring/Puzzles/Games</div>
-                    <div class="price-value">$2</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Series/Chapter - Paperback</div>
-                    <div class="price-value">$3</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Series/Chapter - Hardback</div>
-                    <div class="price-value">$4</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Box Set - Paperback</div>
-                    <div class="price-value">$6/set</div>
-                </div>
-                <div class="price-item">
-                    <div class="price-label">Box Set - Hardback</div>
-                    <div class="price-value">$8/set</div>
-                </div>
-            </div>
-            
-            <div class="highlight-box" style="margin-top: 20px;">
-                <strong>📅 Saturday Pricing:</strong> All prices listed above apply to Saturday, March 7.<br><br>
-                <strong>🛍️ Sunday Bag Day:</strong> Fill a Trader Joe's bag for just $15!<br><br>
-                <strong>📚 Book Cellar:</strong> Items are priced separately.
-            </div>
-        </div>
-
-        <div class="info-section">
-            <h2>🚗 Parking & Transportation</h2>
-            <p><strong>Important:</strong> BCC High School parking is extremely limited. Please use these options:</p>
-            
-            <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; margin: 15px 0; border-radius: 4px;">
-                <strong>🅿️ Best Option: Montgomery County Public Garage</strong><br>
-                <span style="margin-left: 20px;">7400 Waverly Street</span><br>
-                <span style="margin-left: 20px;">• $1.75/hour Saturday</span><br>
-                <span style="margin-left: 20px;">• FREE on Sunday</span><br>
-                <span style="margin-left: 20px;">• Just a 5 minute walk to B-CC</span>
-            </div>
-            
-            <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 12px; margin: 15px 0; border-radius: 4px;">
-                <strong>🚇 Public Transportation</strong><br>
-                <span style="margin-left: 20px;">Bethesda Metro (Red Line) & bus</span><br>
-                <span style="margin-left: 20px;">WMATA: M70, M22</span><br>
-                <span style="margin-left: 20px;">Ride On: 29, 30, 32, 34, 36, 47, 70 to Bethesda Metro</span><br>
-                <span style="margin-left: 20px;">5-7 minute walk from metro</span>
-            </div>
-            
-            <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; margin: 15px 0; border-radius: 4px;">
-                <strong>🚴 Walk or Bike</strong><br>
-                <span style="margin-left: 20px;">Bike racks available at school</span>
-            </div>
-            
-            <p style="font-size: 14px; color: #c62828; font-weight: 500; margin-top: 15px;">
-                ⚠️ Please respect our neighbors: Follow no parking and reserved parking signs
-            </p>
-        </div>
-
-        <div class="info-section">
-            <h2>ℹ️ Good to Know</h2>
-            <p>✓ Payment options: Cash • Credit Card • Apple Pay • Google Pay</p>
-            <p>✓ Stroller parking available</p>
-            <p>✓ Over 60,000 books to browse</p>
-            <p>✓ 65+ categories organized across the school</p>
-        </div>
+    <div class="tentative-note">
+      <span><b>All dates below are tentative</b> — we're confirming them with the school. Check back for updates.</span>
     </div>
 
-    <div id="about" class="content">
-        <!-- Hero Section -->
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); text-align: center;">
-            <h2 style="color: white; margin: 0 0 10px 0; font-size: 28px;">📚 About the B-CC Book Sale</h2>
-            <p style="color: rgba(255,255,255,0.95); font-size: 16px; margin: 0; line-height: 1.6;">Our PTSA's largest fundraiser for over 20 years!</p>
-        </div>
-
-        <!-- Stats Cards -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 25px;">
-            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-                <div style="font-size: 32px; font-weight: bold; color: white; margin-bottom: 5px;">60K+</div>
-                <div style="color: rgba(255,255,255,0.9); font-size: 13px;">Books</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-                <div style="font-size: 32px; font-weight: bold; color: white; margin-bottom: 5px;">65</div>
-                <div style="color: rgba(255,255,255,0.9); font-size: 13px;">Categories</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-                <div style="font-size: 32px; font-weight: bold; color: white; margin-bottom: 5px;">100s</div>
-                <div style="color: rgba(255,255,255,0.9); font-size: 13px;">Volunteers</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-                <div style="font-size: 32px; font-weight: bold; color: white; margin-bottom: 5px;">20+</div>
-                <div style="color: rgba(255,255,255,0.9); font-size: 13px;">Years</div>
-            </div>
-        </div>
-
-        <!-- Main Content Card -->
-        <div style="background: white; border-left: 5px solid #667eea; padding: 25px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-            <h3 style="color: #667eea; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 24px;">📖</span> Our Story
-            </h3>
-            <p style="color: #555; line-height: 1.8; margin-bottom: 15px; text-align: center;">
-                The B-CC Used Book Sale is a beloved community tradition that transforms donated books into educational opportunities. Every spring, hundreds of volunteers dedicate countless hours to collect, sort, and organize an incredible collection of books.
-            </p>
-            <p style="color: #555; line-height: 1.8; margin: 0; text-align: center;">
-                This massive event takes over much of the first floor of B-CC High School over two exciting days in March, creating a treasure hunt experience for book lovers of all ages.
-            </p>
-        </div>
-
-        <!-- Where Money Goes -->
-        <div style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border: 2px solid #4CAF50; padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-            <h3 style="color: #2E7D32; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 24px;">💚</span> Where Your Money Goes
-            </h3>
-            <p style="color: #1B5E20; margin-bottom: 15px; font-weight: 500;">
-                100% of proceeds support B-CC students and programs through the PTSA:
-            </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 15px;">
-                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4CAF50;">
-                    <div style="font-weight: bold; color: #2E7D32; margin-bottom: 5px;">📝 Teacher Grants</div>
-                    <div style="font-size: 13px; color: #666;">Classroom support & supplies</div>
-                </div>
-                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #66BB6A;">
-                    <div style="font-weight: bold; color: #2E7D32; margin-bottom: 5px;">🎉 Teacher Appreciation</div>
-                    <div style="font-size: 13px; color: #666;">Recognition events</div>
-                </div>
-                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #81C784;">
-                    <div style="font-weight: bold; color: #2E7D32; margin-bottom: 5px;">🥫 BCC Food Pantry</div>
-                    <div style="font-size: 13px; color: #666;">Supporting students in need</div>
-                </div>
-                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #A5D6A7;">
-                    <div style="font-weight: bold; color: #2E7D32; margin-bottom: 5px;">🎓 Student Activities</div>
-                    <div style="font-size: 13px; color: #666;">Programs & events</div>
-                </div>
-            </div>
-            <p style="background: white; padding: 15px; border-radius: 8px; margin: 0; text-align: center; font-weight: 500; color: #1B5E20;">
-                🙏 Your purchases directly benefit our school community. Thank you for supporting B-CC!
-            </p>
-        </div>
-
-        <!-- Volunteer Section -->
-        <div style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border: 2px solid #FF9800; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-            <h3 style="color: #E65100; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 24px;">🙋</span> Join Our Volunteer Team!
-            </h3>
-            <p style="color: #E65100; line-height: 1.8; margin-bottom: 15px;">
-                This incredible event wouldn't be possible without our amazing volunteers! We need help with:
-            </p>
-            <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; text-align: center;">
-                    <div>
-                        <div style="font-size: 32px; margin-bottom: 5px;">📦</div>
-                        <div style="font-weight: bold; color: #E65100; font-size: 14px;">Setup</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 32px; margin-bottom: 5px;">💼</div>
-                        <div style="font-weight: bold; color: #E65100; font-size: 14px;">Sale Days</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 32px; margin-bottom: 5px;">🧹</div>
-                        <div style="font-weight: bold; color: #E65100; font-size: 14px;">Cleanup</div>
-                    </div>
-                </div>
-            </div>
-            <p style="background: #FFCC80; padding: 15px; border-radius: 8px; margin: 0; text-align: center; font-weight: 500; color: #BF360C;">
-                Interested? Contact the PTSA to get involved!<br>
-                <span style="color: #BF360C; font-weight: 600;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4f2d2c2c3a3c2a2b2d2020243c2e232a0f2d2c2c3f3b3c2e61203d28">[email&#160;protected]</a></span>
-            </p>
-        </div>
+    <h2 style="margin-top:22px">Season Schedule<span class="pill-tent">Tentative</span></h2>
+    <p class="muted" style="margin-bottom:10px">September 2026 through the sale in March 2027.</p>
+    <div class="sched">
+      <div class="sched-row"><span class="date">Sept 19, 2026<small>(tentative)</small></span><span class="what">First Drop-Off (Saturday)</span><span class="stag drop">Drop-Off</span></div>
+      <div class="sched-row"><span class="date">Oct 10, 2026<small>(tentative)</small></span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
+      <div class="sched-row"><span class="date">Oct 24, 2026<small>(tentative)</small></span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
+      <div class="sched-row"><span class="date">Nov 15, 2026<small>(tentative)</small></span><span class="what">Second Drop-Off (Sunday)</span><span class="stag drop">Drop-Off</span></div>
+      <div class="sched-row"><span class="date">Dec 5, 2026<small>(tentative)</small></span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
+      <div class="sched-row"><span class="date">Dec 12, 2026<small>(tentative)</small></span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
+      <div class="sched-row"><span class="date">Jan 9, 2027<small>(tentative)</small></span><span class="what">Third Drop-Off (Saturday)</span><span class="stag drop">Drop-Off</span></div>
+      <div class="sched-row"><span class="date">Jan 30, 2027<small>(tentative)</small></span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
+      <div class="sched-row"><span class="date">Feb 6, 2027<small>(tentative)</small></span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
+      <div class="sched-row"><span class="date">Feb 20, 2027<small>(tentative)</small></span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
+      <div class="sched-row"><span class="date">Feb 26, 2027<small>(tentative)</small></span><span class="what">Set-Up (ER)</span><span class="stag setup">Set-Up</span></div>
+      <div class="sched-row"><span class="date">Feb 27, 2027<small>(tentative)</small></span><span class="what">Set-Up</span><span class="stag setup">Set-Up</span></div>
+      <div class="sched-row"><span class="date">Feb 28, 2027<small>(tentative)</small></span><span class="what">Set-Up</span><span class="stag setup">Set-Up</span></div>
+      <div class="sched-row"><span class="date">Mar 5, 2027<small>(tentative)</small></span><span class="what">Set-Up</span><span class="stag setup">Set-Up</span></div>
+      <div class="sched-row"><span class="date">Mar 6–7, 2027<small>(tentative)</small></span><span class="what">Sale Days</span><span class="stag sale">Sale</span></div>
     </div>
 
-    <div id="location-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title" id="modal-title"></div>
-                <button class="close-btn" onclick="closeModal()">×</button>
-            </div>
-            <div id="modal-body"></div>
-        </div>
+    <h2 style="margin-top:22px">Ways to Help</h2>
+    <div class="card">
+      <ul class="clean" style="margin-bottom:0">
+        <li><b>Drop-off days</b> — help unload and receive donated books</li>
+        <li><b>Sort days</b> — sort donations into categories</li>
+        <li><b>Set-up week</b> — transform the school into a bookstore</li>
+        <li><b>Sale days</b> — cashiering, restocking, and helping shoppers</li>
+        <li><b>Cleanup</b> — pack up after the sale wraps</li>
+      </ul>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        const categories = {
-            'art-atrium': {
-                name: 'Art Atrium',
-                tables: 80,
-                categories: [
-                    'Children\'s Picture Books (Hardback & Paperback)',
-                    'Children\'s Board Books',
-                    'Children\'s Early Readers',
-                    'Children\'s Chapter Books (Hardback & Paperback)',
-                    'Children\'s Series Books (Hardback & Paperback)',
-                    'Children\'s Reference',
-                    'Children\'s History/Biography',
-                    'Children\'s Science/Nature',
-                    'Children\'s Sports',
-                    'Children\'s Graphic Novels/Comics',
-                    'Children\'s Games/Magic/Puzzles',
-                    'Foreign Language (Children & Adult)',
-                    'Education/Teaching/College Search',
-                    'Exercise/Fitness/Dance',
-                    'Gender Studies/LGBTQ+',
-                    'Health/Medicine/Diet/Nutrition',
-                    'Holidays',
-                    'Music/Sheet Music/Vinyl',
-                    'Parenting/Family',
-                    'Self-Help/Psychology',
-                    'Social Sciences',
-                    'Sports/Adventure',
-                    'Children\'s Hot Titles (Popular Series)'
-                ]
-            },
-            'cafeteria': {
-                name: 'Cafeteria',
-                tables: 123,
-                categories: [
-                    'Fiction Paperback',
-                    'Fiction Hardback',
-                    'Graphic Novels (Adult)',
-                    'Mystery/Thriller',
-                    'Romance',
-                    'Science Fiction/Fantasy',
-                    'Teen/Young Adult',
-                    'African American History & Interest',
-                    'American History/Politics',
-                    'World History',
-                    'Biography/Memoir',
-                    'Business/Economics/Finance',
-                    'Classics',
-                    'Science & Technology',
-                    'Nature & Environment',
-                    'Reference',
-                    'Philosophy',
-                    'Religion',
-                    'Poetry/Plays',
-                    'Short Stories/Essays',
-                    'Test Prep (2022+)',
-                    'Local Interest (MD-DC-VA)',
-                    'Large Print/Tiny Books',
-                    'Theme Tables'
-                ]
-            },
-            'attendance': {
-                name: 'Attendance Atrium',
-                tables: 18,
-                categories: [
-                    'Art/Photography',
-                    'Cooking/Food/Wine',
-                    'Home & Garden',
-                    'Hobbies/Crafts',
-                    'Travel (2020+)',
-                    'Humor',
-                    'Pets'
-                ]
-            },
-            'hallway': {
-                name: 'Cafeteria Hallway',
-                tables: 11,
-                categories: [
-                    'Fashion/Beauty',
-                    'Film/TV/Media',
-                    'Volunteer Tables'
-                ]
-            },
-            'banned': {
-                name: 'Banned Book Nook',
-                tables: 'Special',
-                categories: [
-                    'Banned Books'
-                ]
-            },
-            'book-cellar': {
-                name: 'Book Cellar',
-                tables: 'Special',
-                categories: []
-            }
-        };
+    <div class="card" style="border-left:3px solid var(--accent)">
+      <h3 style="margin-top:0">Sign up to volunteer</h3>
+      <p style="margin-bottom:0">No experience needed — students can earn SSL hours. Email us:<br><span class="email">bccusedbooksale@bccptsa.org</span></p>
+    </div>
+  </section>
 
-        const allCategories = [];
-        Object.keys(categories).forEach(locationKey => {
-            const location = categories[locationKey];
-            location.categories.forEach(cat => {
-                allCategories.push({
-                    name: cat,
-                    location: location.name,
-                    locationKey: locationKey
-                });
-            });
-        });
+  <!-- ============ INFO ============ -->
+  <section id="pane-info" class="tabpane">
+    <div class="overline">Plan Your Visit</div>
+    <h2>Hours</h2>
+    <div class="hours-grid">
+      <div class="hourbox">
+        <div class="day">Saturday, March 7, 2027 (tentative)</div>
+        <div class="time">10:00 AM – 5:00 PM</div>
+      </div>
+      <div class="hourbox">
+        <div class="day">Sunday, March 8, 2027 (tentative)</div>
+        <div class="time">10:00 AM – 3:00 PM</div>
+        <div class="bag">Bag Day</div>
+      </div>
+    </div>
 
-        // Sort categories alphabetically by name
-        allCategories.sort((a, b) => a.name.localeCompare(b.name));
 
-        function showTab(tabName) {
-            document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(tabName).classList.add('active');
-            
-            // Find and activate the button that was clicked
-            const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(button => {
-                if (button.getAttribute('onclick').includes(tabName)) {
-                    button.classList.add('active');
-                }
-            });
+    <h2 style="margin-top:22px">Book Drop-Offs</h2>
+    <div class="dropoff-card">
+      <h3>Donate Your Books</h3>
+      <div class="sub">Bring us your used books at B-CC · 10:00 AM – 2:00 PM</div>
+      <div class="do-dates">
+        <div class="do-date"><div class="w">Sat</div><div class="d">Sept 19, 2026</div><div class="w">(tentative)</div></div>
+        <div class="do-date"><div class="w">Sun</div><div class="d">Nov 15, 2026</div><div class="w">(tentative)</div></div>
+        <div class="do-date"><div class="w">Sat</div><div class="d">Jan 9, 2027</div><div class="w">(tentative)</div></div>
+      </div>
+    </div>
 
-            if (tabName === 'categories') {
-                renderCategories(allCategories);
-            }
-        }
+    <h2 style="margin-top:22px">Location</h2>
+    <div class="card">
+      <p style="margin-bottom:2px"><b>Bethesda-Chevy Chase High School</b></p>
+      <p class="muted" style="margin-bottom:0">First floor, multiple areas<br>4301 East-West Highway, Bethesda, MD 20814</p>
+    </div>
 
-        function showLocation(locationKey) {
-            const location = categories[locationKey];
-            const detailsDiv = document.getElementById('location-details');
-            
-            let mapSVG = '';
-            
-            // Generate specific maps for each area
-            if (locationKey === 'art-atrium') {
-                mapSVG = `
-                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #FFF4E6 0%, #FFE5B4 100%); border-radius: 12px; border: 3px solid #FF8C00;">
-                        <h3 style="text-align: center; color: #FF6600; margin-bottom: 20px; font-size: 22px;">📚 Art Atrium Categories</h3>
-                        
-                        <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <h4 style="color: #e91e63; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #e91e63; padding-bottom: 8px;">👶 Children's Books</h4>
-                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                                <span style="background: #ffcdd2; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Picture Books (HB)</span>
-                                <span style="background: #ffcdd2; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Picture Books (PB)</span>
-                                <span style="background: #f8bbd0; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Board Books</span>
-                                <span style="background: #f8bbd0; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Early Readers</span>
-                                <span style="background: #e1bee7; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Series Books</span>
-                                <span style="background: #d1c4e9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Chapter Books</span>
-                                <span style="background: #b3e5fc; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Graphic Novels</span>
-                                <span style="background: #b2dfdb; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Kids History/Bio</span>
-                                <span style="background: #c8e6c9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Kids Science/Nature</span>
-                                <span style="background: #dcedc8; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Kids Sports</span>
-                                <span style="background: #ffd54f; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word; font-weight: bold; grid-column: 1 / -1;">🔥 Hot Titles</span>
-                            </div>
-                        </div>
-                        
-                        <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <h4 style="color: #1976d2; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #1976d2; padding-bottom: 8px;">👨‍👩‍👧 Adult & General</h4>
-                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                                <span style="background: #bbdefb; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Foreign Language</span>
-                                <span style="background: #c5cae9; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Education/Teaching</span>
-                                <span style="background: #fff9c4; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Music/Vinyl</span>
-                                <span style="background: #ffecb3; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Parenting/Family</span>
-                                <span style="background: #ffe0b2; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Health/Medicine</span>
-                                <span style="background: #ffe082; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Holidays</span>
-                                <span style="background: #ffccbc; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Self-Help/Psychology</span>
-                                <span style="background: #d7ccc8; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Sports/Adventure</span>
-                                <span style="background: #f0f4c3; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Exercise/Fitness</span>
-                                <span style="background: #c8e6c9; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Gender Studies/LGBTQ+</span>
-                                <span style="background: #b2dfdb; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Social Sciences</span>
-                                <span style="background: #f48fb1; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word; grid-column: 1 / -1;">Non-Fiction Reference</span>
-                            </div>
-                        </div>
-                        
-                        <p style="text-align: center; margin-top: 15px; color: #666; font-size: 14px;">← Main entrance to Art Atrium from hallway</p>
-                    </div>
-                `;
-            } else if (locationKey === 'cafeteria') {
-                mapSVG = `
-                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #FFF9E6 0%, #FFE8B4 100%); border-radius: 12px; border: 3px solid #FF9800;">
-                        <h3 style="text-align: center; color: #E65100; margin-bottom: 20px; font-size: 22px;">🍽️ Cafeteria Categories</h3>
-                        
-                        <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <h4 style="color: #1976d2; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #1976d2; padding-bottom: 8px;">📖 Fiction</h4>
-                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                                <span style="background: #e1f5fe; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Fiction (PB/HB)</span>
-                                <span style="background: #f3e5f5; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Mystery/Thriller</span>
-                                <span style="background: #fce4ec; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Romance</span>
-                                <span style="background: #e8f5e9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Sci-Fi/Fantasy</span>
-                                <span style="background: #fff3e0; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Teen/Young Adult</span>
-                                <span style="background: #ffebee; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Graphic Novels (Adult)</span>
-                                <span style="background: #fce4ec; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Classics</span>
-                                <span style="background: #e1bee7; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Short Stories/Essays</span>
-                            </div>
-                        </div>
-                        
-                        <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <h4 style="color: #388e3c; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #388e3c; padding-bottom: 8px;">📚 Non-Fiction</h4>
-                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                                <span style="background: #e8eaf6; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">African American History</span>
-                                <span style="background: #e8eaf6; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">American History/Politics</span>
-                                <span style="background: #e0f2f1; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Biography/Memoir</span>
-                                <span style="background: #fff8e1; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Business/Econ/Finance</span>
-                                <span style="background: #fff9c4; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Large Print/Tiny Books</span>
-                                <span style="background: #b2dfdb; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Local Interest (MD-DC-VA)</span>
-                                <span style="background: #c8e6c9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Nature & Environment</span>
-                                <span style="background: #f3e5f5; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Philosophy</span>
-                                <span style="background: #fce4ec; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Poetry/Plays</span>
-                                <span style="background: #efebe9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Reference</span>
-                                <span style="background: #fff3e0; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Religion</span>
-                                <span style="background: #e0f7fa; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Science & Technology</span>
-                                <span style="background: #fff59d; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">Test Prep (2022+)</span>
-                                <span style="background: #f1f8e9; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word;">World History</span>
-                                <span style="background: #b2dfdb; padding: 8px 8px; border-radius: 6px; font-size: 13px; text-align: center; word-wrap: break-word; overflow-wrap: break-word; grid-column: 1 / -1;">Theme Tables</span>
-                            </div>
-                        </div>
-                        
-                        <p style="text-align: center; margin-top: 15px; color: #666; font-size: 14px;">Cashier tables located at entrance →</p>
-                    </div>
-                `;
-            } else if (locationKey === 'attendance') {
-                mapSVG = `
-                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-radius: 12px; border: 3px solid #4CAF50;">
-                        <h3 style="text-align: center; color: #2E7D32; margin-bottom: 15px; font-size: 22px;">🏛️ Attendance Atrium</h3>
-                        <p style="text-align: center; color: #1976D2; font-weight: bold; margin-bottom: 20px; font-size: 14px;">✨ NEW for 2026!</p>
-                        
-                        <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
-                                <span style="background: #e1bee7; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">📸 Art/Photography</span>
-                                <span style="background: #ffccbc; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">🍷 Cooking/Food/Wine</span>
-                                <span style="background: #c8e6c9; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">🏡 Home & Garden</span>
-                                <span style="background: #f8bbd0; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">🎨 Hobbies/Crafts</span>
-                                <span style="background: #81d4fa; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">✈️ Travel (2020+)</span>
-                                <span style="background: #fff59d; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">😂 Humor</span>
-                                <span style="background: #a5d6a7; padding: 10px 8px; border-radius: 6px; font-size: 14px; text-align: center; font-weight: 500; word-wrap: break-word; overflow-wrap: break-word;">🐾 Pets</span>
-                            </div>
-                        </div>
-                        
-                        <p style="text-align: center; margin-top: 15px; color: #666; font-size: 14px;">Entrance from main hallway ↓</p>
-                    </div>
-                `;
-            } else if (locationKey === 'book-cellar') {
-                mapSVG = `
-                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); border-radius: 12px; border: 3px solid #1976D2;">
-                        <h3 style="text-align: center; color: #0D47A1; margin-bottom: 20px; font-size: 22px;">📖 Book Cellar</h3>
-                        
-                        <div style="background: white; border-radius: 10px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <div style="font-size: 48px; text-align: center; margin-bottom: 20px;">📚✨</div>
-                            <p style="color: #555; font-size: 16px; line-height: 1.8; text-align: center;">
-                                Tucked just beyond the bustle of the main sale, the Book Cellar is for curious browsers and serious book lovers alike. It's a treasure-hunt space filled with thoughtfully sorted gems and hidden finds.
-                            </p>
-                        </div>
-                    </div>
-                `;
-            } else if (locationKey === 'hallway') {
-                mapSVG = `
-                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%); border-radius: 12px; border: 3px solid #FF6F00;">
-                        <h3 style="text-align: center; color: #E65100; margin-bottom: 20px; font-size: 22px;">🎨 Cafeteria Hallway</h3>
-                        
-                        <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
-                                <span style="background: #f8bbd0; padding: 15px 20px; border-radius: 6px; font-size: 16px; text-align: center; font-weight: 500;">💄 Fashion/Beauty</span>
-                                <span style="background: #f8bbd0; padding: 15px 20px; border-radius: 6px; font-size: 16px; text-align: center; font-weight: 500;">🎬 Film/TV/Media</span>
-                                <span style="background: #e1bee7; padding: 15px 20px; border-radius: 6px; font-size: 16px; text-align: center; font-weight: 500;">🤝 Volunteer Tables</span>
-                            </div>
-                        </div>
-                        
-                        <p style="text-align: center; margin-top: 15px; color: #666; font-size: 14px;">Located between Art Atrium and Cafeteria</p>
-                    </div>
-                `;
-            } else if (locationKey === 'banned') {
-                mapSVG = `
-                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #FFE5CC 0%, #FFD4A3 100%); border-radius: 12px; border: 3px solid #FF6600;">
-                        <h3 style="text-align: center; color: #BF360C; margin-bottom: 20px; font-size: 22px;">📚 Banned Book Nook</h3>
-                        
-                        <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <div style="text-align: center;">
-                                <span style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 20px 30px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; box-shadow: 0 4px 12px rgba(255,107,107,0.3);">
-                                    🚫 Banned Books 📖
-                                </span>
-                                <p style="margin-top: 20px; color: #555; font-size: 15px; line-height: 1.7; padding: 0 10px;">
-                                    Discover books that have been removed in schools and libraries around the U.S. These books spark questions, broaden perspectives, and help readers feel seen. We think it's important because access to ideas is part of a strong community: when stories are silenced, everyone loses. Browse, discover, and take home a book that reminds us why the freedom to read matters.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            let html = `
-                <div class="area-highlight">
-                    <h3 style="margin-bottom: 10px; color: #2c3e50;">${location.name}</h3>
-                    ${mapSVG}`;
-            
-            // Only show categories list for areas other than book-cellar and banned
-            if (locationKey !== 'book-cellar' && locationKey !== 'banned') {
-                html += `
-                    <div style="background: white; padding: 15px; border-radius: 6px; margin-top: 15px;">
-                        <strong style="display: block; margin-bottom: 10px;">All categories in this area:</strong>
-                        <ul style="margin-left: 20px; line-height: 1.8;">
-            `;
-            
-                location.categories.forEach(cat => {
-                    html += `<li style="color: #2c3e50;">${cat}</li>`;
-                });
-            
-                html += `
-                        </ul>
-                    </div>`;
-            }
-            
-            html += `
-                </div>
-            `;
-            
-            detailsDiv.innerHTML = html;
+    <h2 style="margin-top:22px">Parking &amp; Getting Here</h2>
+    <div class="card">
+      <h3 style="margin-top:0">Recommended: county public garage</h3>
+      <p class="muted">7400 Waverly Street — $1.75/hour Saturday, <b>free on Sunday</b>. About a five-minute walk to B-CC.</p>
+      <h3>Metro &amp; bus</h3>
+      <p class="muted">Bethesda Metro (Red Line), 5–7 minute walk. WMATA buses M70 &amp; M22; Ride On routes 29, 30, 32, 34, 36, 47, and 70 to Bethesda Metro.</p>
+      <h3>Walk or bike</h3>
+      <p class="muted" style="margin-bottom:0">Bike racks are available at the school.</p>
+    </div>
+    <div class="card warn">
+      <p class="muted" style="margin:0"><b style="color:var(--accent)">School parking is extremely limited.</b> Please respect our neighbors and follow all no-parking and reserved-parking signs.</p>
+    </div>
 
-            // Highlight selected button
-            document.querySelectorAll('.location-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            event.target.classList.add('selected');
-        }
+    <h2 style="margin-top:22px">At the Sale</h2>
+    <div class="card">
+      <ul class="clean" style="margin-bottom:0">
+        <li>Over 60,000 books across 59 categories</li>
+        <li>Stroller and large-container parking near the entrance</li>
+        <li>Pay with cash, credit card, Apple Pay, or Google Pay</li>
+        <li>Book Cellar treasures priced individually</li>
+      </ul>
+    </div>
 
-        function renderCategories(categoriesToShow) {
-            const listDiv = document.getElementById('category-list');
-            listDiv.innerHTML = '';
-            
-            categoriesToShow.forEach(cat => {
-                const item = document.createElement('div');
-                item.className = 'category-item';
-                item.onclick = () => showCategoryModal(cat);
-                
-                item.innerHTML = `
-                    <div class="category-name">${cat.name}</div>
-                    <div class="category-location">
-                        <span class="location-badge">${cat.location}</span>
-                    </div>
-                `;
-                
-                listDiv.appendChild(item);
-            });
-        }
+    <h2 style="margin-top:22px">About the Sale</h2>
+    <div class="card">
+      <p class="muted" style="margin-bottom:10px">Our PTSA's largest fundraiser for over 20 years</p>
+      <div class="stat-grid">
+        <div class="stat"><div class="n">60K+</div><div class="l">Books</div></div>
+        <div class="stat"><div class="n">59</div><div class="l">Categories</div></div>
+        <div class="stat"><div class="n">100s</div><div class="l">Volunteers</div></div>
+        <div class="stat"><div class="n">20+</div><div class="l">Years</div></div>
+      </div>
+      <p>Every spring, hundreds of volunteers collect, sort, and organize an incredible collection of donated books, transforming much of B-CC's first floor into a two-day treasure hunt for book lovers of all ages.</p>
+      <h3>Where your money goes</h3>
+      <p style="margin-bottom:0">100% of proceeds support B-CC students and programs through the PTSA — teacher grants and classroom supplies, teacher appreciation events, the BCC Food Pantry, and student activities. Thank you for supporting our school community.</p>
+    </div>
 
-        function filterCategories(searchTerm) {
-            const filtered = allCategories.filter(cat => 
-                cat.name.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            // Keep alphabetical order in search results
-            filtered.sort((a, b) => a.name.localeCompare(b.name));
-            renderCategories(filtered);
-        }
 
-        function showCategoryModal(cat) {
-            const modal = document.getElementById('location-modal');
-            const title = document.getElementById('modal-title');
-            const body = document.getElementById('modal-body');
-            
-            title.textContent = cat.name;
-            
-            const location = categories[cat.locationKey];
-            body.innerHTML = `
-                <div style="margin-bottom: 20px;">
-                    <div style="font-size: 18px; font-weight: 500; color: #3498db; margin-bottom: 10px;">
-                        📍 ${cat.location}
-                    </div>
-                    <p style="color: #7f8c8d; line-height: 1.6;">
-                        This category is located in the <strong>${cat.location}</strong> area. 
-                        ${location.tables !== 'Special' ? `There are ${location.tables} tables in this area.` : ''}
-                    </p>
-                </div>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
-                    <strong style="display: block; margin-bottom: 10px;">Other categories in ${cat.location}:</strong>
-                    <ul style="margin-left: 20px; line-height: 1.8; color: #555;">
-                        ${location.categories.filter(c => c !== cat.name).map(c => `<li>${c}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            
-            modal.style.display = 'block';
-        }
+  </section>
+</main>
 
-        function closeModal() {
-            document.getElementById('location-modal').style.display = 'none';
-                   }
+<!-- Bottom sheet for map areas -->
+<div class="backdrop" id="backdrop"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet-handle"></div>
+  <div class="sheet-bar" id="sheetBar"></div>
+  <h3 id="sheetTitle"></h3>
+  <p class="note" id="sheetNote"></p>
+  <div class="chips" id="sheetChips"></div>
+  <button class="sheet-close" id="sheetClose">Close</button>
+</div>
 
-        window.onclick = function(event) {
-            const modal = document.getElementById('location-modal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
-    </script>
+<!-- Bottom navigation -->
+<nav aria-label="Main">
+  <div class="nav-inner">
+    <button class="navbtn active" data-pane="map" aria-label="Map">
+      <svg viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>
+      Map
+    </button>
+    <button class="navbtn" data-pane="find" aria-label="Find a book category">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      Categories
+    </button>
+    <button class="navbtn" data-pane="prices" aria-label="Prices">
+      <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg>
+      Prices
+    </button>
+    <button class="navbtn" data-pane="volunteer" aria-label="Volunteer">
+      <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-9.2-8.8C1.3 8.4 3 5 6.4 5c2 0 3.4 1.1 4.1 2.3.3.5.7.5 1 0C12.2 6.1 13.6 5 15.6 5 19 5 20.7 8.4 21.2 11.2 19 15.4 12 20 12 20z"/></svg>
+      Volunteer
+    </button>
+    <button class="navbtn" data-pane="info" aria-label="Info">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><line x1="12" y1="7.5" x2="12" y2="7.6"/></svg>
+      Info
+    </button>
+  </div>
+</nav>
+
+<script>
+// ---------- Data ----------
+var AREAS = {
+  art: {
+    name: "Art Atrium",
+    color: "#B9822B",
+    note: "Children's & adult books · 80 tables",
+    cats: ["Children's Picture Books (Hardback & Paperback)","Children's Board Books","Children's Early Readers","Children's Chapter Books (Hardback & Paperback)","Children's Series Books (Hardback & Paperback)","Children's Reference","Children's History/Biography","Children's Science/Nature","Children's Sports","Children's Graphic Novels/Comics","Children's Games/Magic/Puzzles","Children's Hot Titles (Popular Series)","Foreign Language (Children & Adult)","Education/Teaching/College Search","Exercise/Fitness/Dance","Gender Studies/LGBTQ+","Health/Medicine/Diet/Nutrition","Holidays","Music/Sheet Music/Vinyl","Parenting/Family","Self-Help/Psychology","Social Sciences","Sports/Adventure"]
+  },
+  cafeteria: {
+    name: "Cafeteria",
+    color: "#9C4257",
+    note: "Fiction & non-fiction · 123 tables",
+    cats: ["Fiction Paperback","Fiction Hardback","Graphic Novels (Adult)","Mystery/Thriller","Romance","Science Fiction/Fantasy","Teen/Young Adult","African American History & Interest","American History/Politics","World History","Biography/Memoir","Business/Economics/Finance","Classics","Science & Technology","Nature & Environment","Reference","Philosophy","Religion","Poetry/Plays","Short Stories/Essays","Test Prep (2022+)","Local Interest (MD-DC-VA)","Large Print/Tiny Books","Theme Tables"]
+  },
+  attendance: {
+    name: "Attendance Atrium",
+    color: "#3F6B52",
+    note: "18 tables",
+    cats: ["Art/Photography","Cooking/Food/Wine","Home & Garden","Hobbies/Crafts","Travel (2020+)","Humor","Pets"]
+  },
+  hallway: {
+    name: "Cafeteria Hallway",
+    color: "#56789B",
+    note: "11 tables",
+    cats: ["Fashion/Beauty","Film/TV/Media","Volunteer Tables"]
+  },
+  banned: {
+    name: "Banned Book Nook",
+    color: "#C25E31",
+    note: "Freedom to read",
+    cats: ["Banned Books"]
+  },
+  cellar: {
+    name: "Book Cellar",
+    color: "#715C94",
+    note: "Items priced individually",
+    cats: ["Hidden Treasures — priced as marked"]
+  },
+  checkout: {
+    name: "General Checkout",
+    color: "#182433",
+    note: "Pay here before you leave",
+    cats: ["Cash","Credit Card","Apple Pay","Google Pay"]
+  }
+};
+
+// Flat category list for search (name + area key)
+var CATEGORIES = [];
+["art","attendance","hallway","cafeteria","banned","cellar"].forEach(function(key){
+  AREAS[key].cats.forEach(function(c){
+    CATEGORIES.push({ name: c, area: key });
+  });
+});
+CATEGORIES.sort(function(a,b){ return a.name.localeCompare(b.name); });
+
+// ---------- Tabs ----------
+var navBtns = document.querySelectorAll(".navbtn");
+function showPane(id){
+  document.querySelectorAll(".tabpane").forEach(function(p){ p.classList.remove("active"); });
+  document.getElementById("pane-" + id).classList.add("active");
+  navBtns.forEach(function(b){ b.classList.toggle("active", b.dataset.pane === id); });
+  window.scrollTo(0,0);
+}
+navBtns.forEach(function(b){
+  b.addEventListener("click", function(){ showPane(b.dataset.pane); });
+});
+
+// ---------- Map bottom sheet ----------
+var sheet = document.getElementById("sheet");
+var backdrop = document.getElementById("backdrop");
+function openSheet(key){
+  var a = AREAS[key];
+  if (!a) return;
+  document.getElementById("sheetTitle").textContent = a.name;
+  document.getElementById("sheetNote").textContent = a.note;
+  document.getElementById("sheetBar").style.background = a.color;
+  var chips = document.getElementById("sheetChips");
+  chips.innerHTML = "";
+  a.cats.forEach(function(c){
+    var s = document.createElement("span");
+    s.className = "chip";
+    s.textContent = c;
+    chips.appendChild(s);
+  });
+  sheet.classList.add("show");
+  backdrop.classList.add("show");
+}
+function closeSheet(){
+  sheet.classList.remove("show");
+  backdrop.classList.remove("show");
+}
+document.querySelectorAll(".area").forEach(function(el){
+  el.addEventListener("click", function(){ openSheet(el.dataset.area); });
+  el.addEventListener("keydown", function(e){
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openSheet(el.dataset.area); }
+  });
+});
+backdrop.addEventListener("click", closeSheet);
+document.getElementById("sheetClose").addEventListener("click", closeSheet);
+document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeSheet(); });
+
+// ---------- Category search ----------
+var searchInput = document.getElementById("catSearch");
+var catList = document.getElementById("catList");
+function renderCats(filter){
+  var q = (filter || "").trim().toLowerCase();
+  catList.innerHTML = "";
+  var shown = 0;
+  CATEGORIES.forEach(function(c){
+    if (q && c.name.toLowerCase().indexOf(q) === -1) return;
+    shown++;
+    var row = document.createElement("div");
+    row.className = "cat-row";
+    var name = document.createElement("span");
+    name.className = "name";
+    name.textContent = c.name;
+    var badge = document.createElement("span");
+    badge.className = "badge";
+    var dot = document.createElement("i");
+    dot.className = "dot";
+    dot.style.background = AREAS[c.area].color;
+    badge.appendChild(dot);
+    badge.appendChild(document.createTextNode(AREAS[c.area].name));
+    row.appendChild(name);
+    row.appendChild(badge);
+    row.addEventListener("click", function(){ openSheet(c.area); });
+    catList.appendChild(row);
+  });
+  if (shown === 0) {
+    var empty = document.createElement("div");
+    empty.className = "no-results";
+    empty.textContent = "No match — ask a volunteer in a UBS t-shirt, they know every table.";
+    catList.appendChild(empty);
+  }
+}
+searchInput.addEventListener("input", function(){ renderCats(searchInput.value); });
+renderCats("");
+</script>
 </body>
 </html>
