@@ -80,6 +80,83 @@ p{margin-bottom:10px}
   border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;
 }
 
+
+/* ---------- Home ---------- */
+.nextup{
+  background:var(--navy);color:#fff;border-radius:var(--radius);
+  padding:18px 20px;margin-bottom:14px;
+}
+.nextup .kicker{
+  font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#8FA0B3;margin-bottom:6px;
+}
+.nextup .ev{
+  font-family:'Source Serif 4',serif;font-weight:700;font-size:23px;line-height:1.15;
+}
+.nextup .when{font-size:14.5px;color:#D7DEE6;margin-top:5px}
+.nextup .detail{font-size:13.5px;color:#8FA0B3;margin-top:2px}
+.nextup .count{
+  display:inline-block;margin-top:12px;
+  background:var(--accent);border-radius:999px;
+  padding:5px 14px;font-size:12.5px;font-weight:700;letter-spacing:.04em;
+}
+.nextup.live{background:#2E5340}
+.nextup.live .count{background:#fff;color:#2E5340}
+.nextup.live .kicker{color:#B6D0BF}
+.nextup.live .when,.nextup.live .detail{color:#DCE9E1}
+
+figure{margin:0 0 14px}
+figure img{
+  display:block;width:100%;height:auto;border-radius:var(--radius);
+  border:1px solid var(--line);background:var(--card,#EFEDE8);
+}
+figcaption{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.45}
+.hero img{aspect-ratio:3/4;object-fit:cover}
+
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.trio img{
+  display:block;width:100%;aspect-ratio:3/4;object-fit:cover;
+  border-radius:8px;border:1px solid var(--line);
+}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.duo img{
+  display:block;width:100%;aspect-ratio:4/5;object-fit:cover;
+  border-radius:8px;border:1px solid var(--line);
+}
+.pullquote{
+  border-left:3px solid var(--accent);padding:2px 0 2px 15px;margin:14px 0;
+}
+.pullquote p{
+  font-family:'Source Serif 4',serif;font-size:17px;line-height:1.42;
+  margin-bottom:6px;
+}
+.pullquote cite{font-size:12.5px;color:var(--muted);font-style:normal;font-weight:600}
+.bigstat{
+  display:flex;align-items:baseline;gap:10px;
+  padding:10px 0;border-bottom:1px solid var(--line);
+}
+.bigstat:last-child{border-bottom:none}
+.bigstat .n{
+  font-family:'Source Serif 4',serif;font-weight:700;font-size:24px;
+  color:var(--accent);flex:none;min-width:74px;
+}
+.bigstat .t{font-size:14px;color:#3B4552;line-height:1.4}
+.datestrip{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:4px 18px;margin-bottom:12px;
+}
+.dstrip-row{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 0;border-bottom:1px solid var(--line);
+}
+.dstrip-row:last-child{border-bottom:none}
+.dstrip-row .dt{
+  flex:none;width:104px;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;
+}
+.dstrip-row .lb{flex:1;font-size:14px;color:#3B4552}
+.dstrip-row.big .dt,.dstrip-row.big .lb{color:var(--accent)}
+.dstrip-row.big .lb{font-weight:700}
+
 /* ---------- Map ---------- */
 .mapbox{
   background:var(--surface);border:1px solid var(--line);
@@ -252,6 +329,35 @@ svg{display:block;width:100%;height:auto}
 .stag.setup{background:#E8EDF3;color:#33506B}
 .stag.sale{background:#E9F1EC;color:#3F6B52}
 
+
+/* ---------- What we accept ---------- */
+.accept-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.acol{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:14px 16px;
+}
+.acol.no{background:#FAF7F7;border-color:#E8DADA}
+.acol h4{
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:9px;display:flex;align-items:center;gap:6px;
+}
+.acol.yes h4{color:#3F6B52}
+.acol.no h4{color:var(--accent)}
+.acol h4 svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.acol ul{list-style:none}
+.acol li{
+  font-size:13.5px;line-height:1.45;padding:3.5px 0 3.5px 13px;position:relative;color:#3B4552;
+}
+.acol li::before{
+  content:"";position:absolute;left:0;top:11px;
+  width:4px;height:4px;border-radius:50%;
+}
+.acol.yes li::before{background:#3F6B52}
+.acol.no li::before{background:#C08A8A}
+@media (max-width:400px){
+  .accept-grid{grid-template-columns:1fr}
+}
+
 /* ---------- Info ---------- */
 .hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
 .hourbox{
@@ -286,14 +392,14 @@ nav{
   position:sticky;top:0;z-index:30;
   background:var(--surface);border-bottom:1px solid var(--line);
 }
-.nav-inner{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.nav-inner{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr)}
 .navbtn{
   appearance:none;background:none;border:none;cursor:pointer;
-  padding:10px 4px 9px;display:flex;flex-direction:column;align-items:center;gap:3px;
-  font-family:'Libre Franklin',sans-serif;font-size:10.5px;font-weight:600;
-  color:var(--muted);letter-spacing:.02em;position:relative;
+  padding:10px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-family:'Libre Franklin',sans-serif;font-size:10px;font-weight:600;
+  color:var(--muted);letter-spacing:0;position:relative;
 }
-.navbtn svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.navbtn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .navbtn.active{color:var(--accent)}
 .navbtn.active::before{
   content:"";position:absolute;bottom:0;left:25%;right:25%;height:2px;background:var(--accent);
@@ -323,13 +429,17 @@ nav{
 <!-- Top navigation -->
 <nav aria-label="Main">
   <div class="nav-inner">
-    <button class="navbtn active" data-pane="map" aria-label="Map">
+    <button class="navbtn active" data-pane="home" aria-label="Home">
+      <svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-6h4v6"/></svg>
+      Home
+    </button>
+    <button class="navbtn" data-pane="map" aria-label="Map">
       <svg viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>
       Map
     </button>
     <button class="navbtn" data-pane="find" aria-label="Find a book category">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
-      Categories
+      Books
     </button>
     <button class="navbtn" data-pane="prices" aria-label="Prices">
       <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg>
@@ -349,8 +459,71 @@ nav{
 
 <main class="wrap">
 
+  <!-- ============ HOME ============ -->
+  <section id="pane-home" class="tabpane active">
+
+    <div class="nextup" id="nextUp">
+      <div class="kicker">Next Up</div>
+      <div class="ev">Loading…</div>
+    </div>
+
+    <figure class="hero">
+      <img src="atrium.jpg" alt="The Art Atrium during the sale, with rows of tables stretching down a skylit hallway, every one covered in books." loading="lazy">
+      <figcaption>Every March, B-CC's first floor becomes a bookstore — over 60,000 donated books across 59 categories.</figcaption>
+    </figure>
+
+    <div class="overline">Mark Your Calendar</div>
+    <h2>Key Dates</h2>
+    <div class="datestrip">
+      <div class="dstrip-row"><span class="dt">Sept 19, 2026</span><span class="lb">Book drop-off · 10 AM – 2 PM</span></div>
+      <div class="dstrip-row"><span class="dt">Nov 15, 2026</span><span class="lb">Book drop-off · 10 AM – 2 PM</span></div>
+      <div class="dstrip-row"><span class="dt">Jan 9, 2027</span><span class="lb">Book drop-off · 10 AM – 2 PM</span></div>
+      <div class="dstrip-row big"><span class="dt">Mar 6–7, 2027</span><span class="lb">The Sale</span></div>
+    </div>
+    <p class="muted" style="margin-bottom:0">Volunteer sort days run all season — see the <b>Volunteer</b> tab.</p>
+
+    <div class="overline">A Sale Favorite</div>
+    <h2>Blind Date with a Book</h2>
+    <p>Every year our volunteers wrap books in kraft paper and hand-draw the covers. No title. No author. Just three hints about what's inside — and you don't find out until you unwrap it.</p>
+    <div class="trio">
+      <img src="blinddate-1.jpg" alt="A hand-drawn wrapped book showing a monkey wearing a crown, with hints about a Printz Award-winning graphic novel." loading="lazy">
+      <img src="blinddate-2.jpg" alt="A hand-drawn wrapped book showing a butterfly and a rose, with hints about a poetry collection." loading="lazy">
+      <img src="blinddate-3.jpg" alt="A hand-drawn wrapped book showing flowers in a vase, with hints about a Pulitzer Prize winner." loading="lazy">
+    </div>
+    <p class="muted">Every cover is drawn by hand by a student volunteer. They go fast — come early.</p>
+
+    <div class="overline">Worth a Look</div>
+    <h2>Theme Tables</h2>
+    <p>Beyond the 59 categories, our volunteers build displays that change every year — <b>BookTok</b>, <b>Read It Before the Movie</b>, and the <b>Banned Books</b> table, which has become one of the most talked-about corners of the sale.</p>
+    <div class="duo">
+      <img src="theme-tables.jpg" alt="A theme table with a Read It Before The Movie sign, next to a Book Tok display." loading="lazy">
+      <img src="banned-books.jpg" alt="A large banner reading Banned Books hanging above a display table of frequently challenged titles." loading="lazy">
+    </div>
+
+    <div class="overline">Students</div>
+    <h2>Earn SSL Hours</h2>
+    <div class="card">
+      <p>Montgomery County students can earn Student Service Learning hours at every drop-off, sort day, set-up shift, and sale day — and volunteers get to take home a book of their choosing.</p>
+      <p class="muted" style="margin-bottom:0">No experience needed. Bring a friend — most people do.</p>
+    </div>
+
+    <div class="overline">Why It Matters</div>
+    <h2>The Numbers</h2>
+    <div class="card">
+      <div class="bigstat"><span class="n">60,000+</span><span class="t">Donated books, sorted by hand into 59 categories</span></div>
+      <div class="bigstat"><span class="n">100%</span><span class="t">Of proceeds go to B-CC students, teachers, and programs</span></div>
+      <div class="bigstat"><span class="n">20+</span><span class="t">Years running — the PTSA's largest fundraiser</span></div>
+    </div>
+    <figure>
+      <img src="poetry.jpg" alt="Rows of tables of books beneath hanging international flags, with signs for Poetry, Plays, Short Stories and Classics." loading="lazy">
+      <figcaption>Poetry, plays, short stories and classics — one corner of the cafeteria.</figcaption>
+    </figure>
+    <p>Your $3 paperback funds teacher grants, classroom supplies, the BCC Food Pantry, and student activities. Thank you for supporting our school community.</p>
+
+  </section>
+
   <!-- ============ MAP ============ -->
-  <section id="pane-map" class="tabpane active">
+  <section id="pane-map" class="tabpane">
     <div class="overline">First Floor</div>
     <h2>Sale Map</h2>
     <p class="map-hint">Select any room to see its full category list</p>
@@ -609,6 +782,35 @@ nav{
       </div>
     </div>
 
+    <div class="accept-grid">
+      <div class="acol yes">
+        <h4><svg viewBox="0 0 24 24"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>Yes please</h4>
+        <ul>
+          <li>Fiction &amp; non-fiction</li>
+          <li>Children's &amp; young adult</li>
+          <li>Cookbooks, crafts &amp; hobbies</li>
+          <li>Biography &amp; history</li>
+          <li>Vinyl records &amp; sheet music</li>
+          <li>Recent travel guides (2020+)</li>
+          <li>Anything in good, clean condition</li>
+        </ul>
+      </div>
+      <div class="acol no">
+        <h4><svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>No thanks</h4>
+        <ul>
+          <li>Encyclopedias</li>
+          <li>Textbooks</li>
+          <li>Travel guides before 2020</li>
+          <li>Magazines</li>
+          <li>Outdated computer books</li>
+          <li>Outdated reference books</li>
+          <li>CDs &amp; DVDs</li>
+          <li>Books on tape</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted" style="font-size:13px;margin-bottom:0">Please make sure donations are dry, clean, and free of mold or water damage — we can't sell books that arrive damaged.</p>
+
     <h2 style="margin-top:22px">Location</h2>
     <div class="card">
       <p style="margin-bottom:2px"><b>Bethesda-Chevy Chase High School</b></p>
@@ -804,6 +1006,101 @@ function renderCats(filter){
     catList.appendChild(empty);
   }
 }
+// ---------- "Next Up" card (updates itself, no editing needed) ----------
+// Each entry: year, month (1-12), day, label, detail, kind
+var EVENTS = [
+  {y:2026,m:9, d:19, label:"Book Drop-Off",  detail:"10:00 AM \u2013 2:00 PM at B-CC", kind:"public"},
+  {y:2026,m:10,d:10, label:"Volunteer Sort Day", detail:"Help sort donated books",   kind:"volunteer"},
+  {y:2026,m:10,d:24, label:"Volunteer Sort Day", detail:"Help sort donated books",   kind:"volunteer"},
+  {y:2026,m:11,d:15, label:"Book Drop-Off",  detail:"10:00 AM \u2013 2:00 PM at B-CC", kind:"public"},
+  {y:2026,m:12,d:5,  label:"Volunteer Sort Day", detail:"Help sort donated books",   kind:"volunteer"},
+  {y:2026,m:12,d:12, label:"Volunteer Sort Day", detail:"Help sort donated books",   kind:"volunteer"},
+  {y:2027,m:1, d:9,  label:"Book Drop-Off",  detail:"10:00 AM \u2013 2:00 PM at B-CC", kind:"public"},
+  {y:2027,m:1, d:30, label:"Volunteer Sort Day", detail:"Help sort donated books",   kind:"volunteer"},
+  {y:2027,m:2, d:6,  label:"Volunteer Sort Day", detail:"Help sort donated books",   kind:"volunteer"},
+  {y:2027,m:2, d:20, label:"Volunteer Sort Day", detail:"Help sort donated books",   kind:"volunteer"},
+  {y:2027,m:2, d:26, label:"Set-Up Week Begins", detail:"Volunteers welcome",        kind:"volunteer"},
+  {y:2027,m:3, d:6,  label:"The Used Book Sale", detail:"Sat 10\u20135 \u00b7 Sun 10\u20133", kind:"sale"},
+  {y:2027,m:3, d:7,  label:"The Used Book Sale", detail:"Sunday is Bag Day \u00b7 10\u20133", kind:"sale"}
+];
+
+(function(){
+  var box = document.getElementById("nextUp");
+  if (!box) return;
+
+  var today = new Date();
+  today.setHours(0,0,0,0);
+
+  var next = null;
+  for (var i = 0; i < EVENTS.length; i++) {
+    var e = EVENTS[i];
+    var d = new Date(e.y, e.m - 1, e.d);
+    d.setHours(0,0,0,0);
+    if (d.getTime() >= today.getTime()) { next = e; next._date = d; break; }
+  }
+
+  function fmt(d){
+    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    var mons = ["January","February","March","April","May","June","July",
+                "August","September","October","November","December"];
+    return days[d.getDay()] + ", " + mons[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+  }
+
+  if (!next) {
+    box.innerHTML =
+      '<div class="kicker">Thank You</div>' +
+      '<div class="ev">That\u2019s a wrap!</div>' +
+      '<div class="when">Next season\u2019s dates will be posted here soon.</div>';
+    return;
+  }
+
+  var diff = Math.round((next._date - today) / 86400000);
+  var countText;
+  if (diff === 0) countText = "Today";
+  else if (diff === 1) countText = "Tomorrow";
+  else if (diff < 14) countText = "In " + diff + " days";
+  else if (diff < 60) countText = "In " + Math.round(diff/7) + " weeks";
+  else countText = "In " + Math.round(diff/30) + " months";
+
+  var kicker = next.kind === "sale" ? "The Sale" :
+               next.kind === "public" ? "Bring Us Your Books" : "Lend a Hand";
+
+  // Sale weekend, happening right now
+  if (next.kind === "sale" && diff === 0) {
+    box.className = "nextup live";
+    box.innerHTML =
+      '<div class="kicker">Happening Now</div>' +
+      '<div class="ev">We\u2019re open today</div>' +
+      '<div class="when">' + next.detail + '</div>' +
+      '<div class="detail">Bethesda-Chevy Chase High School</div>' +
+      '<div class="count">Open the Map \u2192</div>';
+    var go = box.querySelector(".count");
+    go.style.cursor = "pointer";
+    go.addEventListener("click", function(){ showPane("map"); });
+    return;
+  }
+
+  box.className = "nextup";
+  box.innerHTML =
+    '<div class="kicker">' + kicker + '</div>' +
+    '<div class="ev">' + next.label + '</div>' +
+    '<div class="when">' + fmt(next._date) + '</div>' +
+    '<div class="detail">' + next.detail + '</div>' +
+    '<div class="count">' + countText + '</div>';
+})();
+
+// ---------- Hide photos gracefully if they haven't been uploaded yet ----------
+(function(){
+  var imgs = document.querySelectorAll('#pane-home img');
+  for (var i = 0; i < imgs.length; i++) {
+    imgs[i].addEventListener("error", function(){
+      var fig = this.closest("figure");
+      if (fig) { fig.style.display = "none"; return; }
+      this.style.display = "none";
+    });
+  }
+})();
+
 searchInput.addEventListener("input", function(){ renderCats(searchInput.value); });
 renderCats("");
 </script>
