@@ -55,6 +55,11 @@ h1{
   display:flex;flex-wrap:wrap;gap:4px 0;align-items:center;
 }
 .dates b{color:#fff;font-weight:600}
+.venue{
+  margin-top:9px;padding-top:9px;border-top:1px solid #33445A;
+  font-size:13.5px;font-weight:600;color:#fff;line-height:1.4;
+}
+.venue span{display:block;font-weight:400;font-size:13px;color:#B9C4D0}
 .dates .sep{margin:0 9px;color:#4A5A6D}
 
 /* ---------- Sections ---------- */
@@ -419,8 +424,11 @@ nav{
     <h1>Used Book Sale</h1>
     <div class="dates">
       <span><b>March 6–7, 2027</b></span><span class="sep">|</span>
-      <span>Sat 10–5 · Sun 10–3</span><span class="sep">|</span>
-      <span>Bethesda, MD</span>
+      <span>Sat 10–5 · Sun 10–3</span>
+    </div>
+    <div class="venue">
+      Bethesda-Chevy Chase High School<br>
+      <span>4301 East-West Highway, Bethesda, MD 20814</span>
     </div>
   </div>
 </header>
@@ -471,6 +479,12 @@ nav{
       <img src="atrium.jpg" alt="The Art Atrium during the sale, with rows of tables stretching down a skylit hallway, every one covered in books." loading="lazy">
       <figcaption>Every March, B-CC's first floor becomes a bookstore — over 60,000 donated books across 59 categories.</figcaption>
     </figure>
+
+    <div class="card addr">
+      <div class="overline" style="margin:0 0 4px">Where</div>
+      <p style="margin-bottom:2px"><b>Bethesda-Chevy Chase High School</b></p>
+      <p class="muted" style="margin-bottom:0">4301 East-West Highway, Bethesda, MD 20814<br>Main entrance, follow the signs</p>
+    </div>
 
     <div class="overline">Mark Your Calendar</div>
     <h2>Key Dates</h2>
@@ -650,7 +664,7 @@ nav{
       <span><i class="dot" style="background:var(--c-banned)"></i>Banned Book Nook</span>
       <span><i class="dot" style="background:var(--c-cellar)"></i>Book Cellar</span>
     </div>
-    <p class="map-note">Looking for something specific? Use the <b>Categories</b> tab below.</p>
+    <p class="map-note">Looking for something specific? Use the <b>Books</b> tab.</p>
   </section>
 
   <!-- ============ CATEGORIES ============ -->
