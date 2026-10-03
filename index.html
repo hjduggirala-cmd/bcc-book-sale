@@ -397,7 +397,8 @@ nav{
   position:sticky;top:0;z-index:30;
   background:var(--surface);border-bottom:1px solid var(--line);
 }
-.nav-inner{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr)}
+.nav-inner{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(7,1fr)}
+a.navbtn{text-decoration:none}
 .navbtn{
   appearance:none;background:none;border:none;cursor:pointer;
   padding:10px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:3px;
@@ -461,6 +462,10 @@ nav{
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><line x1="12" y1="7.5" x2="12" y2="7.6"/></svg>
       Info
     </button>
+    <a class="navbtn" href="/bannedbooks/" aria-label="Banned Book Guide">
+      <svg viewBox="0 0 24 24"><path d="M4 4.5h6a2 2 0 0 1 2 2V20a1.5 1.5 0 0 0-1.5-1.5H4z"/><path d="M20 4.5h-6a2 2 0 0 0-2 2V20a1.5 1.5 0 0 1 1.5-1.5H20z"/></svg>
+      Banned
+    </a>
   </div>
 </nav>
 
@@ -509,6 +514,7 @@ nav{
     <div class="overline">Worth a Look</div>
     <h2>Theme Tables</h2>
     <p>Beyond the 59 categories, our volunteers build displays that change every year — <b>BookTok</b>, <b>Read It Before the Movie</b>, and the <b>Banned Books</b> table, which has become one of the most talked-about corners of the sale.</p>
+    <p><a href="/bannedbooks/" style="color:var(--accent);font-weight:600">Search our Banned Book Guide &rarr;</a></p>
     <div class="duo">
       <img src="theme-tables.jpg" alt="A theme table with a Read It Before The Movie sign, next to a Book Tok display." loading="lazy">
       <img src="banned-books.jpg" alt="A large banner reading Banned Books hanging above a display table of frequently challenged titles." loading="lazy">
@@ -941,7 +947,7 @@ var CATEGORIES = [];
 CATEGORIES.sort(function(a,b){ return a.name.localeCompare(b.name); });
 
 // ---------- Tabs ----------
-var navBtns = document.querySelectorAll(".navbtn");
+var navBtns = document.querySelectorAll("button.navbtn");
 function showPane(id){
   document.querySelectorAll(".tabpane").forEach(function(p){ p.classList.remove("active"); });
   document.getElementById("pane-" + id).classList.add("active");
