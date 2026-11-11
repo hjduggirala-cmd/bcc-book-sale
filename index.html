@@ -287,6 +287,14 @@ svg{display:block;width:100%;height:auto}
 .payrow .chip{background:var(--bg)}
 
 
+/* ---------- Volunteer video ---------- */
+.video-wrap{
+  position:relative;width:100%;aspect-ratio:16/9;
+  border-radius:var(--radius);overflow:hidden;background:#000;
+  border:1px solid var(--line);margin-bottom:8px;
+}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
 /* ---------- Volunteer schedule ---------- */
 .tentative-note{
   display:flex;align-items:flex-start;gap:10px;
@@ -768,6 +776,19 @@ a.navbtn{text-decoration:none}
       </ul>
     </div>
 
+    <h2 style="margin-top:22px">How to Sort Books</h2>
+    <p class="muted" style="margin-bottom:10px">New to sort days? Watch this quick video before your first shift.</p>
+    <div class="video-wrap">
+      <iframe id="sort-video"
+        src="https://www.youtube-nocookie.com/embed/BM1OD4sEb30?rel=0"
+        title="How to sort books for the B-CC Used Book Sale"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+    </div>
+    <p class="muted" style="margin-bottom:14px;font-size:13px">Video not loading? <a href="https://www.youtube.com/watch?v=BM1OD4sEb30" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">Watch it on YouTube &rarr;</a></p>
+
     <div class="card" style="border-left:3px solid var(--accent)">
       <h3 style="margin-top:0">Sign up to volunteer</h3>
       <p style="margin-bottom:0">No experience needed — students can earn SSL hours. Email us:<br><span class="email">bccusedbooksale@bccptsa.org</span></p>
@@ -952,6 +973,9 @@ function showPane(id){
   document.querySelectorAll(".tabpane").forEach(function(p){ p.classList.remove("active"); });
   document.getElementById("pane-" + id).classList.add("active");
   navBtns.forEach(function(b){ b.classList.toggle("active", b.dataset.pane === id); });
+  // Stop the sorting video if someone leaves the Volunteer tab mid-play
+  var v = document.getElementById("sort-video");
+  if (v && id !== "volunteer") { v.src = v.src; }
   window.scrollTo(0,0);
 }
 navBtns.forEach(function(b){
