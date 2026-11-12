@@ -165,34 +165,44 @@ figcaption{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.45}
 /* ---------- Map ---------- */
 .mapbox{
   background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--radius);padding:10px;margin-bottom:12px;
+  border-radius:var(--radius);padding:8px;margin-bottom:12px;
 }
 svg{display:block;width:100%;height:auto}
 .area{cursor:pointer}
-.area rect,.area ellipse{transition:filter .15s ease}
-.area:hover rect,.area:hover ellipse,.area:focus rect,.area:focus ellipse{filter:brightness(.965)}
+#saleMap .area{transition:opacity .2s ease}
+#saleMap .area rect,#saleMap .area ellipse{transition:filter .15s ease}
+#saleMap .area:hover rect:first-child,#saleMap .area:hover ellipse:first-child{filter:brightness(.96)}
 .area:focus{outline:none}
-.area:focus-visible rect,.area:focus-visible ellipse{stroke-width:4.5}
-.rm{
-  font-family:'Source Serif 4',serif;font-weight:700;
+#saleMap .area:focus-visible rect:first-child,#saleMap .area:focus-visible ellipse:first-child{stroke-width:3.5}
+#saleMap.has-sel .area{opacity:.38}
+#saleMap.has-sel .area.sel{opacity:1}
+#saleMap .area.sel rect:first-child,#saleMap .area.sel ellipse:first-child{stroke-width:3}
+.rm{font-family:'Source Serif 4',serif;font-weight:700}
+.util{font-family:'Libre Franklin',sans-serif;font-weight:500}
+.cap{font-family:'Libre Franklin',sans-serif;font-weight:500}
+.tag{font-family:'Libre Franklin',sans-serif;font-weight:700;fill:#fff}
+.roomlist{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;margin-bottom:12px;
 }
-.lbl{
-  font-family:'Libre Franklin',sans-serif;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;
+.roomrow{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  background:none;border:none;border-top:1px solid var(--line);
+  border-left:5px solid var(--rc);
+  padding:12px 14px 12px 13px;font:inherit;color:inherit;
 }
-.li{font-family:'Libre Franklin',sans-serif;font-size:15px;fill:#3B4552}
-.cap{font-family:'Libre Franklin',sans-serif;fill:#66707C}
-.tag{font-family:'Libre Franklin',sans-serif;font-weight:700;letter-spacing:.1em;fill:#fff}
-.legend{
-  display:flex;flex-wrap:wrap;gap:7px 16px;justify-content:center;
-  font-size:12.5px;font-weight:500;color:var(--muted);margin-bottom:10px;
-}
-.legend span{display:flex;align-items:center;gap:6px}
+.roomrow:first-child{border-top:none}
+.roomrow:hover{background:var(--bg)}
+.roomrow:focus-visible{outline:2px solid var(--navy);outline-offset:-2px}
+.rr-main{flex:1;min-width:0;display:block}
+.rr-main b{display:block;font-family:'Source Serif 4',serif;font-weight:600;font-size:16.5px;line-height:1.25}
+.rr-main span{display:block;font-size:13px;color:var(--muted);line-height:1.4;margin-top:2px}
+.rr-count{flex:none;font-size:12.5px;font-weight:600;color:var(--muted);white-space:nowrap}
 .dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
 .map-note{text-align:center;font-size:13px;color:var(--muted)}
 .map-hint{
-  text-align:center;font-size:13px;color:var(--muted);
-  margin:2px 0 12px;font-weight:500;
+  font-size:13.5px;color:var(--muted);
+  margin:-6px 0 12px;font-weight:500;
 }
 
 /* ---------- Bottom sheet ---------- */
@@ -554,129 +564,112 @@ a.navbtn{text-decoration:none}
   <section id="pane-map" class="tabpane">
     <div class="overline">First Floor</div>
     <h2>Sale Map</h2>
-    <p class="map-hint">Select any room to see its full category list</p>
+    <p class="map-hint">Tap a room to see everything shelved there</p>
     <div class="mapbox">
-      <svg viewBox="0 0 1100 820" role="img" aria-label="Floor plan of the book sale. Select a room for its categories.">
+      <svg id="saleMap" viewBox="0 0 360 446" role="img" aria-label="Floor plan of the book sale. Select a room for its categories.">
+
+        <!-- Floor -->
+        <rect x="1" y="1" width="358" height="444" rx="12" fill="#F6F5F2"/>
 
         <!-- Stroller parking (top) -->
-        <rect x="170" y="20" width="690" height="50" rx="8" fill="#EFEDE8" stroke="#C9C4BA" stroke-width="1.5" stroke-dasharray="6 5"/>
-        <text x="515" y="42" text-anchor="middle" class="lbl" font-size="13" fill="#66707C">Stroller &amp; Large Container Parking</text>
-        <text x="515" y="60" text-anchor="middle" class="cap" font-size="11.5">Please keep aisles clear</text>
+        <rect x="58" y="10" width="198" height="28" rx="6" fill="none" stroke="#B5AFA3" stroke-width="1.2" stroke-dasharray="5 4"/>
+        <text x="157" y="28" text-anchor="middle" class="util" font-size="10.5" fill="#66707C">Stroller &amp; large container parking</text>
 
         <!-- Art Atrium -->
         <g class="area" data-area="art" tabindex="0" role="button" aria-label="Art Atrium — children's and adult books, 80 tables">
-          <rect x="170" y="90" width="550" height="250" rx="10" fill="#FBF6EC" stroke="#B9822B" stroke-width="3"/>
-          <text x="445" y="130" text-anchor="middle" class="rm" font-size="27" fill="#8A5F1B">Art Atrium</text>
-          <text x="445" y="153" text-anchor="middle" class="cap" font-size="13.5">Children's &amp; Adult Books</text>
-          <text x="255" y="186" class="li">Children's</text>
-          <text x="255" y="209" class="li">Education</text>
-          <text x="255" y="232" class="li">Exercise &amp; Fitness</text>
-          <text x="255" y="255" class="li">Foreign Language</text>
-          <text x="255" y="278" class="li">Gender Studies</text>
-          <text x="505" y="186" class="li">Health &amp; Medicine</text>
-          <text x="505" y="209" class="li">Parenting</text>
-          <text x="505" y="232" class="li">Self-Help</text>
-          <text x="505" y="255" class="li">Sports</text>
-          <text x="505" y="278" class="li">Vinyl &amp; Sheet Music</text>
-          <rect x="352" y="296" width="186" height="27" rx="13.5" fill="#B9822B"/>
-          <text x="445" y="314" text-anchor="middle" class="tag" font-size="11">80 TABLES · SEE ALL</text>
+          <rect x="58" y="46" width="164" height="114" rx="9" fill="#F4E4C4" stroke="#B9822B" stroke-width="1.5"/>
+          <text x="140" y="90" text-anchor="middle" class="rm" font-size="21" fill="#75500F">Art Atrium</text>
+          <text x="140" y="108" text-anchor="middle" class="cap" font-size="11.5" fill="#75500F">Children's &amp; adult books</text>
+          <rect x="106" y="122" width="68" height="20" rx="10" fill="#B9822B"/>
+          <text x="140" y="136" text-anchor="middle" class="tag" font-size="10.5">80 tables</text>
         </g>
 
         <!-- Banned Book Nook -->
         <g class="area" data-area="banned" tabindex="0" role="button" aria-label="Banned Book Nook">
-          <rect x="860" y="90" width="200" height="130" rx="10" fill="#FBF1EB" stroke="#C25E31" stroke-width="3"/>
-          <text x="960" y="138" text-anchor="middle" class="rm" font-size="19" fill="#9A4A25">Banned</text>
-          <text x="960" y="163" text-anchor="middle" class="rm" font-size="19" fill="#9A4A25">Book Nook</text>
-          <text x="960" y="192" text-anchor="middle" class="cap" font-size="12.5">Freedom to Read</text>
+          <rect x="264" y="46" width="90" height="74" rx="9" fill="#F7D9C9" stroke="#C25E31" stroke-width="1.5"/>
+          <text x="309" y="74" text-anchor="middle" class="rm" font-size="14" fill="#8A3F1D">Banned</text>
+          <text x="309" y="91" text-anchor="middle" class="rm" font-size="14" fill="#8A3F1D">Book Nook</text>
+          <text x="309" y="107" text-anchor="middle" class="cap" font-size="10.5" fill="#8A3F1D">Freedom to read</text>
         </g>
 
-        <!-- General Checkout (left, vertical) -->
+        <!-- General Checkout (left, between Art Atrium and Attendance Atrium) -->
         <g class="area" data-area="checkout" tabindex="0" role="button" aria-label="General checkout">
-          <rect x="30" y="360" width="130" height="220" rx="10" fill="#182433"/>
-          <text x="95" y="398" text-anchor="middle" class="lbl" font-size="13" fill="#fff">General</text>
-          <text x="95" y="418" text-anchor="middle" class="lbl" font-size="13" fill="#fff">Checkout</text>
-          <line x1="55" y1="434" x2="135" y2="434" stroke="#3A4A5D" stroke-width="1.5"/>
-          <text x="95" y="460" text-anchor="middle" class="cap" font-size="13" fill="#B9C4D0">Cash</text>
-          <text x="95" y="484" text-anchor="middle" class="cap" font-size="13" fill="#B9C4D0">Credit Card</text>
-          <text x="95" y="508" text-anchor="middle" class="cap" font-size="13" fill="#B9C4D0">Apple Pay</text>
-          <text x="95" y="532" text-anchor="middle" class="cap" font-size="13" fill="#B9C4D0">Google Pay</text>
+          <rect x="8" y="118" width="42" height="124" rx="9" fill="#182433"/>
+          <text transform="translate(33.5 180) rotate(-90)" text-anchor="middle" class="util" font-size="12" font-weight="700" fill="#fff">General checkout</text>
         </g>
 
-        <!-- Attendance Atrium (center oval) -->
-        <g class="area" data-area="attendance" tabindex="0" role="button" aria-label="Attendance Atrium — new for 2026, 18 tables">
-          <ellipse cx="445" cy="470" rx="285" ry="130" fill="#EFF4F0" stroke="#3F6B52" stroke-width="3"/>
-          <text x="445" y="418" text-anchor="middle" class="rm" font-size="24" fill="#2E5340">Attendance Atrium</text>
-          <text x="298" y="458" class="li">Art &amp; Photography</text>
-          <text x="298" y="483" class="li">Cooking, Food &amp; Wine</text>
-          <text x="298" y="508" class="li">Hobbies &amp; Crafts</text>
-          <text x="298" y="533" class="li">Home &amp; Garden</text>
-          <text x="520" y="458" class="li">Humor</text>
-          <text x="520" y="483" class="li">Pets</text>
-          <text x="520" y="508" class="li">Travel</text>
+        <!-- Attendance Atrium (long corridor) -->
+        <g class="area" data-area="attendance" tabindex="0" role="button" aria-label="Attendance Atrium — 18 tables">
+          <rect x="58" y="200" width="164" height="92" rx="9" fill="#D6E6DB" stroke="#3F6B52" stroke-width="1.5"/>
+          <text x="140" y="238" text-anchor="middle" class="rm" font-size="16" fill="#264A37">Attendance Atrium</text>
+          <rect x="106" y="252" width="68" height="20" rx="10" fill="#3F6B52"/>
+          <text x="140" y="266" text-anchor="middle" class="tag" font-size="10.5">18 tables</text>
         </g>
 
         <!-- Cafeteria Hallway (vertical strip) -->
-        <g class="area" data-area="hallway" tabindex="0" role="button" aria-label="Cafeteria Hallway — fashion, film and TV">
-          <rect x="750" y="240" width="90" height="360" rx="8" fill="#F0F4F8" stroke="#56789B" stroke-width="2.5"/>
-          <text x="795" y="278" text-anchor="middle" class="lbl" font-size="11.5" fill="#41607F">Hallway</text>
-          <line x1="768" y1="292" x2="822" y2="292" stroke="#56789B" stroke-width="1.5"/>
-          <text x="795" y="382" text-anchor="middle" class="cap" font-size="12.5">Fashion &amp;</text>
-          <text x="795" y="399" text-anchor="middle" class="cap" font-size="12.5">Beauty</text>
-          <text x="795" y="428" text-anchor="middle" class="cap" font-size="12.5">Film, TV &amp;</text>
-          <text x="795" y="445" text-anchor="middle" class="cap" font-size="12.5">Media</text>
+        <g class="area" data-area="hallway" tabindex="0" role="button" aria-label="Cafeteria Hallway — fashion, film and TV, 11 tables">
+          <rect x="230" y="130" width="26" height="210" rx="7" fill="#D8E3EF" stroke="#56789B" stroke-width="1.5"/>
+          <text transform="translate(247 235) rotate(-90)" text-anchor="middle" class="util" font-size="11.5" font-weight="700" fill="#34526F">Hallway · 11 tables</text>
         </g>
 
         <!-- Cafeteria (right side) -->
         <g class="area" data-area="cafeteria" tabindex="0" role="button" aria-label="Cafeteria — fiction and non-fiction, 123 tables">
-          <rect x="860" y="240" width="200" height="360" rx="10" fill="#FAF1F3" stroke="#9C4257" stroke-width="3"/>
-          <text x="960" y="282" text-anchor="middle" class="rm" font-size="24" fill="#7C3345">Cafeteria</text>
-          <text x="960" y="305" text-anchor="middle" class="cap" font-size="12.5">Fiction &amp; Non-Fiction</text>
-          <text x="875" y="338" class="li" font-size="13.5">Business</text>
-          <text x="875" y="363" class="li" font-size="13.5">Classics</text>
-          <text x="875" y="388" class="li" font-size="13.5">Fiction</text>
-          <text x="875" y="413" class="li" font-size="13.5">History</text>
-          <text x="875" y="438" class="li" font-size="13.5">Memoir</text>
-          <text x="875" y="463" class="li" font-size="13.5">Mystery</text>
-          <text x="968" y="338" class="li" font-size="13.5">Philosophy</text>
-          <text x="968" y="363" class="li" font-size="13.5">Reference</text>
-          <text x="968" y="388" class="li" font-size="13.5">Romance</text>
-          <text x="968" y="413" class="li" font-size="13.5">Sci-Fi</text>
-          <text x="968" y="438" class="li" font-size="13.5">Science</text>
-          <text x="968" y="463" class="li" font-size="13.5">Young Adult</text>
-          <rect x="867" y="486" width="186" height="26" rx="13" fill="#9C4257"/>
-          <text x="960" y="503.5" text-anchor="middle" class="tag" font-size="10.5">123 TABLES · SEE ALL</text>
-          <text x="960" y="536" text-anchor="middle" class="cap" font-size="11.5">+ many more</text>
+          <rect x="264" y="130" width="90" height="210" rx="9" fill="#F1D4DB" stroke="#9C4257" stroke-width="1.5"/>
+          <text x="309" y="218" text-anchor="middle" class="rm" font-size="16.5" fill="#6E2A3B">Cafeteria</text>
+          <text x="309" y="236" text-anchor="middle" class="cap" font-size="11.5" fill="#6E2A3B">Fiction &amp;</text>
+          <text x="309" y="250" text-anchor="middle" class="cap" font-size="11.5" fill="#6E2A3B">non-fiction</text>
+          <rect x="273" y="264" width="72" height="20" rx="10" fill="#9C4257"/>
+          <text x="309" y="278" text-anchor="middle" class="tag" font-size="10.5">123 tables</text>
         </g>
 
         <!-- Book Cellar -->
         <g class="area" data-area="cellar" tabindex="0" role="button" aria-label="Book Cellar — hidden treasures">
-          <rect x="860" y="620" width="200" height="110" rx="10" fill="#F4F1F8" stroke="#715C94" stroke-width="3"/>
-          <text x="960" y="668" text-anchor="middle" class="rm" font-size="20" fill="#584876">Book Cellar</text>
-          <text x="960" y="694" text-anchor="middle" class="cap" font-size="12.5">Hidden Treasures</text>
+          <rect x="264" y="350" width="90" height="50" rx="9" fill="#E3DBEF" stroke="#715C94" stroke-width="1.5"/>
+          <text x="309" y="372" text-anchor="middle" class="rm" font-size="14" fill="#4C3D69">Book Cellar</text>
+          <text x="309" y="388" text-anchor="middle" class="cap" font-size="10.5" fill="#4C3D69">Hidden treasures</text>
         </g>
 
         <!-- Book Dealer Checkout -->
-        <rect x="860" y="740" width="200" height="50" rx="8" fill="#fff" stroke="#182433" stroke-width="2"/>
-        <text x="960" y="770" text-anchor="middle" class="lbl" font-size="11.5" fill="#182433">Book Dealer Checkout</text>
+        <rect x="264" y="408" width="90" height="26" rx="7" fill="#fff" stroke="#182433" stroke-width="1.2"/>
+        <text x="309" y="425" text-anchor="middle" class="util" font-size="10" font-weight="600" fill="#182433">Dealer checkout</text>
 
         <!-- Music Cafe -->
-        <ellipse cx="110" cy="690" rx="72" ry="32" fill="#F0F4F8" stroke="#56789B" stroke-width="2"/>
-        <text x="110" y="695" text-anchor="middle" class="lbl" font-size="11" fill="#41607F">Music Cafe</text>
+        <ellipse cx="50" cy="366" rx="40" ry="17" fill="#fff" stroke="#56789B" stroke-width="1.2"/>
+        <text x="50" y="370" text-anchor="middle" class="util" font-size="10.5" font-weight="600" fill="#34526F">Music Cafe</text>
 
         <!-- Entrance -->
-        <rect x="120" y="745" width="200" height="50" rx="8" fill="#3F6B52"/>
-        <path d="M 220 752 L 213 762 L 227 762 Z" fill="#fff"/>
-        <text x="220" y="778" text-anchor="middle" class="lbl" font-size="13" fill="#fff">Entrance</text>
+        <rect x="64" y="404" width="104" height="30" rx="8" fill="#3F6B52"/>
+        <path d="M 86 414 L 80 424 L 92 424 Z" fill="#fff"/>
+        <text x="124" y="424" text-anchor="middle" class="util" font-size="12.5" font-weight="700" fill="#fff">Entrance</text>
       </svg>
     </div>
 
-    <div class="legend">
-      <span><i class="dot" style="background:var(--c-art)"></i>Art Atrium</span>
-      <span><i class="dot" style="background:var(--c-attend)"></i>Attendance Atrium</span>
-      <span><i class="dot" style="background:var(--c-cafe)"></i>Cafeteria</span>
-      <span><i class="dot" style="background:var(--c-hall)"></i>Hallway</span>
-      <span><i class="dot" style="background:var(--c-banned)"></i>Banned Book Nook</span>
-      <span><i class="dot" style="background:var(--c-cellar)"></i>Book Cellar</span>
+    <div class="roomlist">
+      <button type="button" class="area roomrow" data-area="art" style="--rc:var(--c-art)">
+        <span class="rr-main"><b>Art Atrium</b><span>Children's, parenting, health, self-help, sports, foreign language, vinyl &amp; sheet music</span></span>
+        <span class="rr-count">80 tables</span>
+      </button>
+      <button type="button" class="area roomrow" data-area="attendance" style="--rc:var(--c-attend)">
+        <span class="rr-main"><b>Attendance Atrium</b><span>Art, cooking, home &amp; garden, hobbies, travel, humor, pets</span></span>
+        <span class="rr-count">18 tables</span>
+      </button>
+      <button type="button" class="area roomrow" data-area="cafeteria" style="--rc:var(--c-cafe)">
+        <span class="rr-main"><b>Cafeteria</b><span>Fiction, mystery, romance, sci-fi, young adult, history, memoir, classics and more</span></span>
+        <span class="rr-count">123 tables</span>
+      </button>
+      <button type="button" class="area roomrow" data-area="hallway" style="--rc:var(--c-hall)">
+        <span class="rr-main"><b>Cafeteria Hallway</b><span>Fashion &amp; beauty, film, TV &amp; media</span></span>
+        <span class="rr-count">11 tables</span>
+      </button>
+      <button type="button" class="area roomrow" data-area="banned" style="--rc:var(--c-banned)">
+        <span class="rr-main"><b>Banned Book Nook</b><span>Freedom to read</span></span>
+      </button>
+      <button type="button" class="area roomrow" data-area="cellar" style="--rc:var(--c-cellar)">
+        <span class="rr-main"><b>Book Cellar</b><span>Hidden treasures, priced as marked</span></span>
+      </button>
+      <button type="button" class="area roomrow" data-area="checkout" style="--rc:var(--navy)">
+        <span class="rr-main"><b>General Checkout</b><span>Cash, credit card, Apple Pay, Google Pay</span></span>
+      </button>
     </div>
     <p class="map-note">Looking for something specific? Use the <b>Books</b> tab.</p>
   </section>
@@ -1001,10 +994,19 @@ function openSheet(key){
   });
   sheet.classList.add("show");
   backdrop.classList.add("show");
+  // Highlight the chosen room on the map
+  var map = document.getElementById("saleMap");
+  map.querySelectorAll(".area").forEach(function(el){
+    el.classList.toggle("sel", el.dataset.area === key);
+  });
+  map.classList.add("has-sel");
 }
 function closeSheet(){
   sheet.classList.remove("show");
   backdrop.classList.remove("show");
+  var map = document.getElementById("saleMap");
+  map.classList.remove("has-sel");
+  map.querySelectorAll(".area.sel").forEach(function(el){ el.classList.remove("sel"); });
 }
 document.querySelectorAll(".area").forEach(function(el){
   el.addEventListener("click", function(){ openSheet(el.dataset.area); });
