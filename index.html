@@ -349,6 +349,15 @@ svg{display:block;width:100%;height:auto}
 .sched-row .date{flex:none;width:112px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.25}
 .sched-row .date small{display:block;font-size:10px;font-weight:500;color:var(--muted)}
 .sched-row .what{flex:1;color:#3B4552}
+.sched-row .rowlink{display:block;margin-top:2px;font-size:12.5px;font-weight:700;color:var(--accent);text-decoration:none}
+.sched-row .rowlink:hover{text-decoration:underline}
+.sched-row.past .rowlink{display:none}
+.sched-past{border-bottom:1px solid var(--line)}
+.sched-past summary{cursor:pointer;padding:10px 0;font-size:13px;font-weight:600;color:var(--muted);list-style:none}
+.sched-past summary::-webkit-details-marker{display:none}
+.sched-past summary::before{content:"\25B8";display:inline-block;width:14px;transition:transform .15s}
+.sched-past[open] summary::before{transform:rotate(90deg)}
+.sched-past .sched-row:last-child{border-bottom:1px solid var(--line)}
 .stag{
   flex:none;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   border-radius:4px;padding:3px 8px;white-space:nowrap;
@@ -761,11 +770,20 @@ a.navbtn{text-decoration:none}
     <div class="overline">2026–27 Season</div>
     <h2>Volunteer &amp; Donate</h2>
 
-    <div class="signup" id="signup-nov15">
+    <!-- Sign-up cards: each one hides itself the day after its data-date (YYYY-MM-DD).
+         To add a new one, copy a card and change the date, title, text and link. -->
+    <div class="signup" data-date="2026-12-05">
       <div class="over">Sign up now</div>
-      <h3>Book Drop-Off Volunteers</h3>
-      <p>Sunday, November 15, 2026 &middot; outside the front door. Help unload and receive donated books.</p>
-      <a class="go" href="https://www.signupgenius.com/go/70A0D4FAEAA2AA02-64911595-bccused" target="_blank" rel="noopener">Sign up on SignUpGenius &rarr;</a>
+      <h3>Sort Day Volunteers</h3>
+      <p>Saturday, December 5, 2026 &middot; enter through the side door near the dumpsters. Help sort donated books into categories.</p>
+      <a class="go" href="https://www.signupgenius.com/go/70A0D4FAEAA2AA02-64912102-bccused" target="_blank" rel="noopener">Sign up on SignUpGenius &rarr;</a>
+    </div>
+
+    <div class="signup" data-date="2026-12-12">
+      <div class="over">Sign up now</div>
+      <h3>Sort Day Volunteers</h3>
+      <p>Saturday, December 12, 2026 &middot; enter through the side door near the dumpsters. Help sort donated books into categories.</p>
+      <a class="go" href="https://www.signupgenius.com/go/70A0D4FAEAA2AA02-64912126-bccused" target="_blank" rel="noopener">Sign up on SignUpGenius &rarr;</a>
     </div>
 
     <h2 style="margin-top:22px">Season Schedule</h2>
@@ -775,8 +793,8 @@ a.navbtn{text-decoration:none}
       <div class="sched-row"><span class="date">Oct 10, 2026</span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
       <div class="sched-row"><span class="date">Oct 24, 2026</span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
       <div class="sched-row"><span class="date">Nov 15, 2026</span><span class="what">Second Drop-Off (Sunday)</span><span class="stag drop">Drop-Off</span></div>
-      <div class="sched-row"><span class="date">Dec 5, 2026</span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
-      <div class="sched-row"><span class="date">Dec 12, 2026</span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
+      <div class="sched-row"><span class="date">Dec 5, 2026</span><span class="what">Sort Day<a class="rowlink" href="https://www.signupgenius.com/go/70A0D4FAEAA2AA02-64912102-bccused" target="_blank" rel="noopener">Sign up &rarr;</a></span><span class="stag sort">Sort</span></div>
+      <div class="sched-row"><span class="date">Dec 12, 2026</span><span class="what">Sort Day<a class="rowlink" href="https://www.signupgenius.com/go/70A0D4FAEAA2AA02-64912126-bccused" target="_blank" rel="noopener">Sign up &rarr;</a></span><span class="stag sort">Sort</span></div>
       <div class="sched-row"><span class="date">Jan 9, 2027</span><span class="what">Third Drop-Off (Saturday)</span><span class="stag drop">Drop-Off</span></div>
       <div class="sched-row"><span class="date">Jan 30, 2027</span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
       <div class="sched-row"><span class="date">Feb 6, 2027</span><span class="what">Sort Day</span><span class="stag sort">Sort</span></div>
@@ -1253,11 +1271,33 @@ var EVENTS = [
   }
 })();
 
-// ---------- Hide the Nov 15 sign-up card once that day has passed ----------
+// ---------- Tuck past schedule dates into a "Show past dates" row ----------
 (function(){
-  var el = document.getElementById("signup-nov15");
+  var sched = document.querySelector("#pane-volunteer .sched");
+  if (!sched) return;
+  var past = sched.querySelectorAll(".sched-row.past");
+  if (!past.length) return;
+  var box = document.createElement("details");
+  box.className = "sched-past";
+  var sum = document.createElement("summary");
+  sum.textContent = "Show " + past.length + " past date" + (past.length === 1 ? "" : "s");
+  box.appendChild(sum);
+  box.addEventListener("toggle", function(){
+    sum.textContent = (box.open ? "Hide " : "Show ") + past.length + " past date" + (past.length === 1 ? "" : "s");
+  });
+  sched.insertBefore(box, sched.firstChild);
+  for (var i = 0; i < past.length; i++) box.appendChild(past[i]);
+})();
+
+// ---------- Hide each sign-up card once its day has passed ----------
+(function(){
+  var cards = document.querySelectorAll(".signup[data-date]");
   var t = new Date(); t.setHours(0,0,0,0);
-  if (el && t.getTime() > new Date(2026, 10, 15).getTime()) el.style.display = "none";
+  for (var i = 0; i < cards.length; i++) {
+    var p = cards[i].getAttribute("data-date").split("-");
+    var day = new Date(+p[0], +p[1] - 1, +p[2]);
+    if (t.getTime() > day.getTime()) cards[i].style.display = "none";
+  }
 })();
 
 // ---------- Copy email buttons ----------
