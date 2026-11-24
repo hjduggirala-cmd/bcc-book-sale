@@ -294,6 +294,45 @@ body {
 .clear-btn:hover { background: #f0f0f0; }
 .clear-btn.visible { display: flex; }
 
+
+/* === COVER SCAN === */
+.scan-btn {
+  background: var(--navy); color: var(--gold); border: none; cursor: pointer;
+  width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-right: 0.15rem; transition: transform 0.15s, background 0.15s;
+}
+.scan-btn:hover { background: var(--navy-light); }
+.scan-btn:active { transform: scale(0.94); }
+.scan-panel {
+  display: none; margin-top: 0.75rem; background: var(--white); border-radius: 14px;
+  box-shadow: var(--shadow-lg); padding: 1rem 1.1rem; border-left: 4px solid var(--gold);
+}
+.scan-panel.open { display: block; }
+.scan-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.scan-title { font-weight: 700; color: var(--navy); font-size: 0.98rem; }
+.scan-close { background: none; border: none; cursor: pointer; color: var(--text-light); padding: 0.3rem; border-radius: 8px; display: flex; }
+.scan-close:hover { background: #f0f0f0; }
+.scan-body { margin-top: 0.6rem; font-size: 0.92rem; color: var(--text-light); line-height: 1.5; }
+.scan-progress { height: 6px; background: var(--gold-pale); border-radius: 99px; overflow: hidden; margin-top: 0.7rem; }
+.scan-progress div { height: 100%; width: 0; background: var(--gold); transition: width 0.3s; }
+.scan-preview { width: 54px; height: 72px; object-fit: cover; border-radius: 6px; flex-shrink: 0; box-shadow: var(--shadow); }
+.scan-row { display: flex; gap: 0.85rem; align-items: flex-start; }
+.scan-matches { list-style: none; margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.45rem; }
+.scan-match {
+  width: 100%; text-align: left; background: var(--cream); border: 1px solid #e8e4dc; border-radius: 10px;
+  padding: 0.65rem 0.85rem; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: border-color 0.15s, background 0.15s;
+}
+.scan-match:hover, .scan-match:focus { border-color: var(--gold); background: var(--gold-pale); outline: none; }
+.scan-match strong { display: block; color: var(--navy); font-family: 'Libre Baskerville', serif; font-size: 0.98rem; }
+.scan-match span { font-size: 0.85rem; color: var(--text-light); }
+.scan-actions { margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.scan-again {
+  background: var(--navy); color: var(--white); border: none; border-radius: 99px; padding: 0.55rem 1.05rem;
+  font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.88rem; cursor: pointer;
+}
+.scan-again:hover { color: var(--gold); }
+.scan-read { margin-top: 0.5rem; font-size: 0.8rem; color: #999; font-style: italic; word-break: break-word; }
+
 /* === MISSION === */
 .mission-section {
   max-width: 780px;
@@ -556,10 +595,15 @@ mark {
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </div>
     <input type="text" id="searchInput" placeholder="Search by title or author..." autocomplete="off" autofocus>
+    <button class="scan-btn" id="scanBtn" aria-label="Scan a book cover" title="Scan a book cover">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+    </button>
+    <input type="file" id="scanFile" accept="image/*" capture="environment" hidden>
     <button class="clear-btn" id="clearBtn" aria-label="Clear search">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
+  <div class="scan-panel" id="scanPanel" aria-live="polite"></div>
   <div class="surprise-row">
     <button class="surprise-btn" id="surpriseBtn">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><circle cx="8.5" cy="8.5" r="1.4" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.4" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.4" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.4" fill="currentColor"/></svg>
@@ -852,6 +896,215 @@ function cycleDyk() {
 
 renderDyk();
 setInterval(cycleDyk, 7000);
+
+
+// === COVER SCAN (reads the title off a photo and matches it to the list) ===
+// === COVER SCAN: match OCR text against BOOKS ===
+const SCAN_STOP = new Set(['the','a','an','of','and','or','to','in','on','for','with','at','by','from','is','my','me','i','you','it','be','as','no','not','so','up','we','our','your','its','this','that','what','all','new','book','novel','edition','author','bestselling','bestseller','york','times','national','award','winner','international']);
+function scanNorm(s) {
+  return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+}
+function scanFold(w) {
+  if (/^\d+$/.test(w)) return w;
+  return w.replace(/[i1|]/g, 'l').replace(/0/g, 'o').replace(/rn/g, 'm').replace(/vv/g, 'w');
+}
+function scanLev(a, b, max) {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let prev = Array.from({length: b.length + 1}, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i]; let rowMin = i;
+    for (let j = 1; j <= b.length; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j-1] + 1, prev[j-1] + (a[i-1] === b[j-1] ? 0 : 1));
+      if (cur[j] < rowMin) rowMin = cur[j];
+    }
+    if (rowMin > max) return max + 1;
+    prev = cur;
+  }
+  return prev[b.length];
+}
+let SCAN_INDEX = null;
+function buildScanIndex() {
+  SCAN_INDEX = BOOKS.map(book => {
+    const all = scanNorm(book.t).split(' ').filter(Boolean);
+    let words = all.filter(w => !SCAN_STOP.has(w) && (w.length > 1 || /\d/.test(w)));
+    if (!words.length) words = all;
+    words = words.map(scanFold);
+    const stops = all.filter(w => SCAN_STOP.has(w)).map(scanFold);
+    const authorWords = scanNorm(book.a).split(' ').filter(w => w.length > 2);
+    return { book, words, stops, authorWords };
+  });
+}
+function scanWordSim(w, ocrSet, ocrList) {
+  if (ocrSet.has(w)) return 1;
+  if (w.length < 4) return 0;
+  const max = w.length >= 8 ? 2 : 1;
+  let best = 0;
+  for (const o of ocrList) {
+    if (Math.abs(o.length - w.length) > max) continue;
+    const d = scanLev(w, o, max);
+    if (d <= max) { const s = d === 1 ? 0.8 : 0.6; if (s > best) best = s; if (best === 0.8 && max === 1) break; }
+  }
+  return best;
+}
+function matchCoverText(text, limit) {
+  if (!SCAN_INDEX) buildScanIndex();
+  const tokens = scanNorm(text).split(' ').filter(w => w.length > 1 || /\d/.test(w));
+  // also add joined neighbours (OCR often splits words: "Gat sby")
+  const extra = [];
+  for (let i = 0; i < tokens.length - 1; i++) if (tokens[i].length < 6 && tokens[i+1].length < 6) extra.push(tokens[i] + tokens[i+1]);
+  const ocrList = [...new Set(tokens.concat(extra).map(scanFold))];
+  const ocrSet = new Set(ocrList);
+  if (!ocrList.length) return [];
+  const results = [];
+  for (const entry of SCAN_INDEX) {
+    const { words, stops } = entry;
+    // quick reject: at least one title word must be present or near-present
+    let total = 0, got = 0, matchedLen = 0, misses = 0;
+    for (const w of words) {
+      const weight = Math.min(w.length, 8);
+      total += weight;
+      const s = scanWordSim(w, ocrSet, ocrList);
+      if (s) { got += weight * s; matchedLen += w.length; } else { misses++; if (misses > Math.ceil(words.length / 2)) break; }
+    }
+    if (!got) continue;
+    for (const w of stops) { total += 1; if (ocrSet.has(w)) { got += 1; matchedLen += 1; } }
+    const coverage = got / total;
+    if (coverage < 0.5) continue;
+    // short single-word titles need an exact, reasonably long hit
+    if (matchedLen < 4) continue;
+    let author = 0;
+    for (const a of entry.authorWords) if (ocrSet.has(scanFold(a))) { author = 0.3; break; }
+    const confidence = Math.min(1, matchedLen / 12);
+    const score = coverage * (0.6 + 0.4 * confidence) + author;
+    results.push({ book: entry.book, score });
+  }
+  results.sort((a, b) => b.score - a.score);
+  if (!results.length || results[0].score < 0.7) return [];
+  const floor = Math.max(0.7, results[0].score - 0.4);
+  return results.filter(r => r.score >= floor).slice(0, limit || 5);
+}
+
+const scanBtn = document.getElementById('scanBtn');
+const scanFile = document.getElementById('scanFile');
+const scanPanel = document.getElementById('scanPanel');
+let scanWorkerPromise = null;
+let scanPreviewUrl = null;
+const CLOSE_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+
+function scanShow(title, bodyHtml) {
+  scanPanel.innerHTML = '<div class="scan-head"><span class="scan-title">' + title + '</span>' +
+    '<button class="scan-close" id="scanClose" aria-label="Close">' + CLOSE_SVG + '</button></div>' + bodyHtml;
+  scanPanel.classList.add('open');
+  document.getElementById('scanClose').addEventListener('click', scanReset);
+  const again = document.getElementById('scanAgain');
+  if (again) again.addEventListener('click', () => scanFile.click());
+}
+function scanReset() {
+  scanPanel.classList.remove('open');
+  scanPanel.innerHTML = '';
+}
+function scanSetProgress(pct) {
+  const bar = document.getElementById('scanBar');
+  if (bar) bar.style.width = Math.round(pct) + '%';
+}
+function loadScanEngine() {
+  if (scanWorkerPromise) return scanWorkerPromise;
+  scanWorkerPromise = new Promise((resolve, reject) => {
+    const sc = document.createElement('script');
+    sc.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
+    sc.onload = () => {
+      Tesseract.createWorker('eng', 1, {
+        logger: m => { if (m.status === 'recognizing text') scanSetProgress(30 + m.progress * 65); }
+      }).then(resolve, reject);
+    };
+    sc.onerror = () => reject(new Error('load'));
+    document.head.appendChild(sc);
+  }).catch(err => { scanWorkerPromise = null; throw err; });
+  return scanWorkerPromise;
+}
+function scanPrepImage(file, invert) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const maxDim = 1600;
+      const k = Math.min(1, maxDim / Math.max(img.naturalWidth, img.naturalHeight));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.naturalWidth * k);
+      c.height = Math.round(img.naturalHeight * k);
+      const ctx = c.getContext('2d');
+      ctx.drawImage(img, 0, 0, c.width, c.height);
+      const d = ctx.getImageData(0, 0, c.width, c.height);
+      const px = d.data;
+      for (let i = 0; i < px.length; i += 4) {
+        let g = 0.299 * px[i] + 0.587 * px[i+1] + 0.114 * px[i+2];
+        if (invert) g = 255 - g;
+        px[i] = px[i+1] = px[i+2] = g;
+      }
+      ctx.putImageData(d, 0, 0);
+      resolve(c);
+    };
+    img.onerror = reject;
+    img.src = scanPreviewUrl;
+  });
+}
+function scanPick(title) {
+  searchInput.value = title;
+  scanReset();
+  doSearch();
+  document.querySelector('.results-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+async function runScan(file) {
+  if (scanPreviewUrl) URL.revokeObjectURL(scanPreviewUrl);
+  scanPreviewUrl = URL.createObjectURL(file);
+  const preview = '<img class="scan-preview" src="' + scanPreviewUrl + '" alt="">';
+  scanShow('Reading the cover…', '<div class="scan-row scan-body">' + preview +
+    '<div style="flex:1">Looking for the title. This takes a few seconds (longer the very first time).' +
+    '<div class="scan-progress"><div id="scanBar"></div></div></div></div>');
+  scanSetProgress(8);
+  let worker;
+  try {
+    worker = await loadScanEngine();
+  } catch (e) {
+    scanShow('Couldn’t start the scanner', '<div class="scan-body">The scanner needs an internet connection the first time it’s used. Check your connection and try again, or type the title in the search box.</div>' +
+      '<div class="scan-actions"><button class="scan-again" id="scanAgain">Try again</button></div>');
+    return;
+  }
+  try {
+    scanSetProgress(30);
+    let canvas = await scanPrepImage(file, false);
+    let text = (await worker.recognize(canvas)).data.text;
+    let matches = matchCoverText(text, 5);
+    if (!matches.length) {
+      // light text on a dark cover: try again with colours flipped
+      scanSetProgress(30);
+      canvas = await scanPrepImage(file, true);
+      const text2 = (await worker.recognize(canvas)).data.text;
+      matches = matchCoverText(text + '\n' + text2, 5);
+      text = text + ' ' + text2;
+    }
+    const readSnippet = text.replace(/\s+/g, ' ').trim().slice(0, 140);
+    if (!matches.length) {
+      scanShow('Not on the list, or couldn’t read it', '<div class="scan-row scan-body">' + preview +
+        '<div>No banned title matched what we could read. If the cover has an unusual font, try a closer, straight-on photo with the title filling most of the frame, or type the title.</div></div>' +
+        (readSnippet ? '<div class="scan-read">We read: “' + escapeHtml(readSnippet) + '”</div>' : '') +
+        '<div class="scan-actions"><button class="scan-again" id="scanAgain">Scan again</button></div>');
+      return;
+    }
+    const items = matches.map((m, i) =>
+      '<li><button class="scan-match" data-i="' + i + '"><strong>' + escapeHtml(m.book.t) + '</strong><span>' + escapeHtml(m.book.a) + '</span></button></li>').join('');
+    scanShow(matches.length === 1 ? 'Is this the book?' : 'Is it one of these?',
+      '<div class="scan-row scan-body">' + preview + '<div style="flex:1">Tap the match to see it in the guide.<ul class="scan-matches">' + items + '</ul></div></div>' +
+      '<div class="scan-actions"><button class="scan-again" id="scanAgain">Scan another</button></div>');
+    scanPanel.querySelectorAll('.scan-match').forEach(b => {
+      b.addEventListener('click', () => scanPick(matches[+b.dataset.i].book.t));
+    });
+  } catch (e) {
+    scanShow('Something went wrong', '<div class="scan-body">We couldn’t read that photo. Try taking it again.</div>' +
+      '<div class="scan-actions"><button class="scan-again" id="scanAgain">Scan again</button></div>');
+  }
+}
+scanBtn.addEventListener('click', () => { scanFile.value = ''; scanFile.click(); });
+scanFile.addEventListener('change', () => { if (scanFile.files && scanFile.files[0]) runScan(scanFile.files[0]); });
 
 // === INIT ===
 doSearch();
